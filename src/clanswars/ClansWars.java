@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 /**
  *
  * @author alexander
+ * @author jeesquivel
  */
 public class ClansWars extends Application {
     
