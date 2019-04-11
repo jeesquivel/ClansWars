@@ -6,7 +6,7 @@ import BaseDatos.JsonDBArmas;
 public class DBFactory {
 
 
-    public IBDArma getDefaultDBArma() throws Exception {
+    public IBDArma getDefaultDBArma()  {
             return new JsonDBArmas();
     };
 

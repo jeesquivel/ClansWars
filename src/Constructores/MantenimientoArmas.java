@@ -6,22 +6,28 @@ import Objetos.IArma;
 import java.util.ArrayList;
 
 public class MantenimientoArmas {
-    private static JsonDBArmas jsonDBArmas;
+    private static JsonDBArmas armeria;
     private static  MantenimientoArmas mantenimientoArmas;
 
 
 
-    private static MantenimientoArmas getMantenimientoArmas() throws Exception {
+    public static  MantenimientoArmas getMantenimientoArmas() {
         if (mantenimientoArmas== null)
             mantenimientoArmas= new MantenimientoArmas();
         return mantenimientoArmas;
     }
 
 
-    private MantenimientoArmas() throws Exception {
-        this.jsonDBArmas= new JsonDBArmas();
-
+    private  MantenimientoArmas()  {
+        armeria= (JsonDBArmas) new DBFactory().getDefaultDBArma();
     }
+
+
+
+    public ArrayList<IArma> getArmeria(){
+        return armeria.getCatalogoArmas();
+    }
+
 
 
 

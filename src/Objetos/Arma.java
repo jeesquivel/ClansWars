@@ -13,14 +13,14 @@ import java.util.ArrayList;
  */
 public class Arma implements IArma{
     protected String nombre;
-    protected int alcance;
-    protected int danno;
-    protected int rango;
-    protected int nivel;
-    protected int nivelAparicion;
-    protected ArrayList<String> apariencia;
+    protected long alcance;
+    protected long danno;
+    protected long rango;
+    protected long nivel;
+    protected long nivelAparicion;
+    protected String apariencia;
 
-    public Arma(String nombre, int alcance, int danno, int rango, int nivel, int nivelAparicion, ArrayList<String> apariencia) {
+    public Arma(String nombre, long alcance, long danno, long rango, long nivel, long nivelAparicion, String apariencia) {
         this.nombre = nombre;
         this.alcance = alcance;
         this.danno = danno;
@@ -32,7 +32,7 @@ public class Arma implements IArma{
     
 
 
-    public int getAlcance() {
+    public long getAlcance() {
         return alcance;
     }
 
@@ -40,7 +40,7 @@ public class Arma implements IArma{
         this.alcance = alcance;
     }
 
-    public int getDanno() {
+    public long getDanno() {
         return danno;
     }
 
@@ -48,7 +48,7 @@ public class Arma implements IArma{
         this.danno = danno;
     }
 
-    public int getRango() {
+    public long getRango() {
         return rango;
     }
 
@@ -63,7 +63,7 @@ public class Arma implements IArma{
 
     @Override
     public Arma deepclonar() {
-        return new Arma(nombre, alcance, danno, rango, nivel, nivelAparicion, (ArrayList<String>)apariencia.clone());
+        return new Arma(nombre, alcance, danno, rango, nivel, nivelAparicion,  apariencia);
     }
 
     @Override
