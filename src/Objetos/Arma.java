@@ -31,6 +31,7 @@ public class Arma implements IArma{
     }
     
 
+
     public int getAlcance() {
         return alcance;
     }
