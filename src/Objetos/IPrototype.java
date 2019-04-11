@@ -10,7 +10,7 @@ package Objetos;
  * @author alexander
  * @param <T>
  */
-public interface IPrototype<T> {
-    public IPrototype<T> clone();       // Clonado superficial del objeto
-    public IPrototype<T> deepclone();   // Clonado profundo del objeto
+public interface IPrototype<T> extends Cloneable{
+    public IPrototype<T> clone() throws CloneNotSupportedException;       // Clonado superficial del objeto
+    public IPrototype<T> deepclone() throws CloneNotSupportedException;   // Clonado profundo del objeto
 }
