@@ -7,7 +7,7 @@ package Objetos;
 
 /**
  *
- * @author alexander
+ * @author Alexander Borbón Alpízar
  * @param <T>
  */
 public interface IPrototype<T> extends Cloneable{
