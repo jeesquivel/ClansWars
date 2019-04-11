@@ -10,6 +10,7 @@ import java.util.ArrayList;
 /**
  *
  * @author alexander
+ * @author jeesquivel
  */
 public class Arma implements IArma{
     protected String nombre;
@@ -68,7 +69,7 @@ public class Arma implements IArma{
 
     @Override
     public String toString() {
-        return "Arma{" + "nombre=" + nombre + ", alcance=" + alcance + ", danno=" + danno + ", rango=" + rango + ", nivel=" + nivel + ", nivelAparicion=" + nivelAparicion + ", apariencia=" + apariencia + '}';
+        return "Arma {" + "nombre=" + nombre + ", alcance=" + alcance + ", danno=" + danno + ", rango=" + rango + ", nivel=" + nivel + ", nivelAparicion=" + nivelAparicion + ", apariencia=" + apariencia + '}';
     }
     
     

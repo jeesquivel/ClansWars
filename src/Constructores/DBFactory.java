@@ -1,5 +1,10 @@
 package Constructores;
 
+/**
+ * @author jeesquivel
+ *
+ */
+
 import BaseDatos.IBDArma;
 import BaseDatos.JsonDBArmas;
 

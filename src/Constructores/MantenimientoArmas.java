@@ -1,17 +1,21 @@
 package Constructores;
 
+
+
+
+
 import BaseDatos.JsonDBArmas;
 import Objetos.IArma;
 
 import java.util.ArrayList;
 
-public class MantenimientoArmas {
+public class MantenimientoArmas implements IMantenimiento{
     private static JsonDBArmas armeria;
     private static  MantenimientoArmas mantenimientoArmas;
 
 
 
-    public static  MantenimientoArmas getMantenimientoArmas() {
+    public static  MantenimientoArmas getInstance() {
         if (mantenimientoArmas== null)
             mantenimientoArmas= new MantenimientoArmas();
         return mantenimientoArmas;
@@ -24,17 +28,28 @@ public class MantenimientoArmas {
 
 
 
-    public ArrayList<IArma> getArmeria(){
+    @Override
+    public void guardar() {
+
+    }
+
+    @Override
+    public Object cargarTodo() {
         return armeria.getCatalogoArmas();
     }
 
+    @Override
+    public void cargar() {
 
+    }
 
+    @Override
+    public void insertar() {
 
+    }
 
+    @Override
+    public void borrar() {
 
-
-
-
-
+    }
 }

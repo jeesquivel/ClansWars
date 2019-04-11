@@ -28,10 +28,6 @@ public class ClansWars extends Application {
          JsonDBArmas jsonDBArmas = (JsonDBArmas) new DBFactory().getDefaultDBArma();
          jsonDBArmas.cargarAramas();
 
-
-
-
-        
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

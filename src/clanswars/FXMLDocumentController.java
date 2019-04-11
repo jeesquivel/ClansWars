@@ -38,18 +38,15 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
 
-        MantenimientoArmas mantenimientoArmas= MantenimientoArmas.getMantenimientoArmas();
+        MantenimientoArmas mantenimientoArmas= MantenimientoArmas.getInstance();
 
 
-        ArrayList<IArma> armeria = mantenimientoArmas.getArmeria();
+        ArrayList<IArma> armeria = (ArrayList<IArma>) mantenimientoArmas.cargarTodo();
 
         for (IArma i:armeria) {
             System.out.println(i.toString());
 
         }
-
-
-
 
         Guerrero guerrero = new Guerrero(new Personaje("Arquera",500,1, AbstractObjeto.ESTADO.ESPERANDO,1,100,new ArrayList<>(),new Point(5,1), 0.5, 1, 100), new Arma("MataTodo", 5, 100, 0, 1, 1, ""));
         Guerrero guerrero2 = null;

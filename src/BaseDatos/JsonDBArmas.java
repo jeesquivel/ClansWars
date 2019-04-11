@@ -1,19 +1,16 @@
 package BaseDatos;
 
-
+/**
+ * @author jeesquivel
+ */
 
 import Objetos.Arma;
 import Objetos.IArma;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
-import sun.rmi.server.Activation$ActivationSystemImpl_Stub;
-
 
 import java.io.FileReader;
-import java.net.URLClassLoader;
-import java.time.format.SignStyle;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class JsonDBArmas implements IBDArma {
@@ -40,7 +37,14 @@ public class JsonDBArmas implements IBDArma {
 
 
     @Override
-    public void guardarArmas() {
+    public void editarArmas(String nameArma, String atributo,  long valor) {
+
+
+        //JSONObject value = new JSONObject();
+        //value.put("key","value");
+        //value.put("key","value");//add all the field you want for ZZZZ.
+
+
 
     }
 
@@ -65,22 +69,16 @@ public class JsonDBArmas implements IBDArma {
             nivelAparicion =(long) mapa.get("nivelAparicion");
             apariencia = (String) mapa.get("apariencia");
 
-
             Arma arma = new Arma(nombre,alcance,danno,rango,nivel,nivelAparicion,apariencia);
+
             catalogoArmas.add(arma);
         }
     }
 
 
 
-
-
-
-
-
     @Override
     public void guardarArma(IArma arma) {
-
     }
 
     @Override
@@ -92,7 +90,4 @@ public class JsonDBArmas implements IBDArma {
         return catalogoArmas;
     }
 
-    public void setCatalogoArmas(ArrayList<IArma> catalogoArmas) {
-        this.catalogoArmas = catalogoArmas;
-    }
 }
