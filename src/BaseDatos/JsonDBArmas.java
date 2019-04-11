@@ -11,13 +11,15 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JsonDBArmas implements IBDArma {
 
     public JSONObject jsonArmas;
 
     public JsonDBArmas() throws Exception {
-       this. jsonArmas =  (JSONObject) cargarJson("example.json");
+       this. jsonArmas =  (JSONObject) cargarJson("/home/jeesquivel/Documentos/TEC/diseño/ClansWars/src/BaseDatos/Armas.json");
     }
 
 
@@ -29,24 +31,15 @@ public class JsonDBArmas implements IBDArma {
     }
 
 
-
-
     @Override
     public void guardarArmas() {
 
     }
 
     @Override
-    public ArrayList<IArma> cargarAramas() {
-        String name= (String) jsonArmas.get("name");
-        Integer alcance= (Integer) jsonArmas.get("alcance");
-        Integer danno =  (Integer) jsonArmas.get("danno");
-        Integer rango =  (Integer) jsonArmas.get("rango");
-
-        //Arma arma = new Arma(name,alcance,danno,rango);
-
-
-        return null;
+    public void  cargarAramas() {
+        ArrayList atributos = (ArrayList) jsonArmas.get("armeria");
+        System.out.println(atributos.get(0).toString());
 
     }
 

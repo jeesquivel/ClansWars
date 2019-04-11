@@ -24,6 +24,7 @@ public class Arma extends AbstractObjeto implements IArma, IPrototype{
         this.rango   = rango;
     }
 
+
     public int getAlcance() {
         return alcance;
     }
