@@ -9,6 +9,6 @@ package Objetos;
  *
  * @author alexander
  */
-public interface IArma extends IPrototype{
+public interface IArma extends IPrototype<Arma>{
     
 }

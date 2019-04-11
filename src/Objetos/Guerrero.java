@@ -15,57 +15,21 @@ import java.util.logging.Logger;
  *
  * @author alexander
  */
-public class Guerrero extends AbstractObjeto implements IMovible, IAtacador, Runnable{
-    public enum TIPO {TERRESTRE, AEREO}
+public class Guerrero implements IAtacador, Runnable, IPrototype<Guerrero>{
+    Personaje personaje;
+    IArma arma;
     
-    protected double golpesSegundo;         // Cantidad de veces que el guerrero ataca por segundo
-    protected int campos;                   // Campos que necesita el guerrero
-    protected int velocidad;                // Velocidad en que se mueve el guerrero
-    protected IArma arma;                   // El arma asignada al guerrero
-    protected TIPO tipo;                    // El tipo de guerrero
-    protected AbstractObjeto objetivo;      // El objetivo actual del guerrero
-    protected IArma armaFavorita;           // El arma favorita de este guerrero por la que obtiene un porcentaje mayor de daño
-    
-    private ArrayList<AbstractObjeto> enemigos;
-
-    public Guerrero(String nombre, int vida, int nivel, ESTADO estado, int nivelAparicion, int costo, ArrayList<String> apariencia, Point posicion, double golpesSegundo, int campos, int velocidad, IArma arma, TIPO tipo, AbstractObjeto objetivo) {
-        super(nombre, vida, nivel, estado, nivelAparicion, costo, apariencia, posicion);
-        this.golpesSegundo = golpesSegundo;
-        this.campos        = campos;
-        this.velocidad     = velocidad;
-        this.arma          = arma;
-        this.tipo          = tipo;
-        this.objetivo      = objetivo;
-    }
-    
-    public void atacado(int danno){
-        this.vida -= danno;
-        if (this.vida <= 0)
-            this.estado = ESTADO.MUERTO;
+    public Guerrero(Personaje personaje, IArma arma){
+        this.personaje = personaje;
+        this.arma = arma;
     }
 
-    public double getGolpesSegundo() {
-        return golpesSegundo;
+    public Personaje getPersonaje() {
+        return personaje;
     }
 
-    public void setGolpesSegundo(double golpesSegundo) {
-        this.golpesSegundo = golpesSegundo;
-    }
-
-    public int getCampos() {
-        return campos;
-    }
-
-    public void setCampos(int campos) {
-        this.campos = campos;
-    }
-
-    public int getVelocidad() {
-        return velocidad;
-    }
-
-    public void setVelocidad(int velocidad) {
-        this.velocidad = velocidad;
+    public void setPersonaje(Personaje personaje) {
+        this.personaje = personaje;
     }
 
     public IArma getArma() {
@@ -75,48 +39,10 @@ public class Guerrero extends AbstractObjeto implements IMovible, IAtacador, Run
     public void setArma(IArma arma) {
         this.arma = arma;
     }
-
-    public TIPO getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TIPO tipo) {
-        this.tipo = tipo;
-    }
-
-    public AbstractObjeto getObjetivo() {
-        return objetivo;
-    }
-
-    public void setObjetivo(AbstractObjeto objetivo) {
-        this.objetivo = objetivo;
-    }
-
-    public IArma getArmaFavorita() {
-        return armaFavorita;
-    }
-
-    public void setArmaFavorita(IArma armaFavorita) {
-        this.armaFavorita = armaFavorita;
-    }
-
-    public ArrayList<AbstractObjeto> getEnemigos() {
-        return enemigos;
-    }
-
-    public void setEnemigos(ArrayList<AbstractObjeto> enemigos) {
-        this.enemigos = enemigos;
-    }
     
-    /*
-    Mueve el guerrero en la dirección hacia donde se encuentra el objetivo actual
-    */
-    @Override
-    public void mover() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
-    /*
+
+/*
     El guerrero primero pregunta si hay un objetivo asignado y si el objetivo está vivo,
     de ser así si el objetivo está al alcance de su arma entonces lo ataca sino se mueve hacia él,
     si el objetivo no está vivo o no hay objetivo entonces se busca un objetivo.
@@ -133,10 +59,10 @@ public class Guerrero extends AbstractObjeto implements IMovible, IAtacador, Run
     public AbstractObjeto buscarObjetivo(ArrayList<AbstractObjeto> enemigos) {
         AbstractObjeto mejorObjetivo = null;
         for(AbstractObjeto enemigo: enemigos){
-            if (enemigo != null && ((Guerrero)enemigo).estado != ESTADO.MUERTO){
+            if (enemigo != null && ((Personaje)enemigo).estado != AbstractObjeto.ESTADO.MUERTO){
                 if (mejorObjetivo == null)
                     mejorObjetivo = enemigo;
-                else if (distancia2(this.posicion, enemigo.posicion) < distancia2(this.posicion, mejorObjetivo.posicion))
+                else if (distancia2(personaje.posicion, enemigo.posicion) < distancia2(personaje.posicion, mejorObjetivo.posicion))
                     mejorObjetivo = enemigo;
             }
         }
@@ -152,21 +78,38 @@ public class Guerrero extends AbstractObjeto implements IMovible, IAtacador, Run
     
     @Override
     public void run() {
-        while(this.estado != ESTADO.MUERTO){
+        while(this.personaje.estado != AbstractObjeto.ESTADO.MUERTO){
             try {
-                if (this.objetivo == null || ((Guerrero)this.objetivo).estado == ESTADO.MUERTO){
-                    this.objetivo = buscarObjetivo(enemigos);
-                }else if (distancia2(this.objetivo.posicion,this.posicion) <= Math.pow(((Arma)this.arma).alcance,2)){
+                if (personaje.objetivo == null || ((Personaje)personaje.objetivo).estado == AbstractObjeto.ESTADO.MUERTO){
+                    personaje.objetivo = buscarObjetivo(personaje.getEnemigos());
+                }else if (distancia2(personaje.objetivo.posicion, personaje.posicion) <= Math.pow(((Arma)this.arma).alcance,2)){
                     atacar();
-                    sleep((int)(1000/this.golpesSegundo));
+                    sleep((int)(1000/personaje.golpesSegundo));
                 }else{
-                    mover();
-                    sleep((int)(1000/this.velocidad));
+                    personaje.mover();
+                    sleep((int)(1000/personaje.velocidad));
                 }
             } catch (InterruptedException ex) {
-                Logger.getLogger(Guerrero.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Personaje.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
+
+    @Override
+    public Guerrero clonar() throws CloneNotSupportedException {
+       return new Guerrero(personaje, arma);
+    }
+
+    @Override
+    public Guerrero deepclonar() throws CloneNotSupportedException {
+        return new Guerrero(personaje.deepclonar(), arma.deepclonar());
+    }
+
+    @Override
+    public String toString() {
+        return "Guerrero{" + "personaje=" + personaje.toString() + ", arma=" + arma.toString() + '}';
+    }
+    
+    
     
 }

@@ -5,7 +5,6 @@
  */
 package Objetos;
 
-import java.awt.Point;
 import java.util.ArrayList;
 
 /**
@@ -57,15 +56,13 @@ public class Arma implements IArma{
     }
 
     @Override
-    public IPrototype clone() throws CloneNotSupportedException{
-        return (IPrototype)super.clone();
-        //return new Arma(nombre, vida, nivel, estado, nivelAparicion, costo, apariencia, posicion, alcance, danno, rango);
+    public Arma clonar() {
+       return new Arma(nombre, alcance, danno, rango, nivel, nivelAparicion, apariencia);
     }
 
     @Override
-    public IPrototype deepclone() throws CloneNotSupportedException {
-        return (IPrototype)super.clone();
-        //return new Arma(nombre, vida, nivel, estado, nivelAparicion, costo, (ArrayList<String>)apariencia.clone(), (Point)posicion.clone(), alcance, danno, rango);
+    public Arma deepclonar() {
+        return new Arma(nombre, alcance, danno, rango, nivel, nivelAparicion, (ArrayList<String>)apariencia.clone());
     }
 
     @Override

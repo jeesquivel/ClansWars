@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author alexander
  */
-public class Personaje extends AbstractObjeto implements IMovible, Cloneable{
+public class Personaje extends AbstractObjeto implements IMovible, IPrototype<Personaje>{
     public enum TIPO {TERRESTRE, AEREO}
     
     protected double golpesSegundo;         // Cantidad de veces que el guerrero ataca por segundo
@@ -94,6 +94,20 @@ public class Personaje extends AbstractObjeto implements IMovible, Cloneable{
     public void mover() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Personaje{" + "golpesSegundo=" + golpesSegundo + ", campos=" + campos + ", velocidad=" + velocidad + ", objetivo=" + objetivo + ", armaFavorita=" + armaFavorita + ", enemigos=" + enemigos + '}';
+    }
     
+    @Override
+    public Personaje clonar() throws CloneNotSupportedException {
+       return new Personaje(nombre, vida, nivel, estado, nivelAparicion, costo, apariencia, posicion, golpesSegundo, campos, velocidad);
+    }
+
+    @Override
+    public Personaje deepclonar() throws CloneNotSupportedException {
+        return new Personaje(nombre, vida, nivel, estado, nivelAparicion, costo, (ArrayList<String>)apariencia.clone(), (Point)posicion.clone(), golpesSegundo, campos, velocidad);
+    }
     
 }

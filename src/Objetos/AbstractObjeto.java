@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author alexander
  */
-public abstract class AbstractObjeto {
+public abstract class AbstractObjeto{
     public enum ESTADO {ESPERANDO, AVANZANDO, ATACANDO, MUERTO}
     
     protected String nombre;                    // Nombre que tendrá el objeto
@@ -97,6 +97,11 @@ public abstract class AbstractObjeto {
 
     public void setPosicion(Point posicion) {
         this.posicion = posicion;
+    }
+
+    @Override
+    public String toString() {
+        return "AbstractObjeto{" + "nombre=" + nombre + ", vida=" + vida + ", nivel=" + nivel + ", estado=" + estado + ", nivelAparicion=" + nivelAparicion + ", costo=" + costo + ", apariencia=" + apariencia + ", posicion=" + posicion + '}';
     }
     
     
