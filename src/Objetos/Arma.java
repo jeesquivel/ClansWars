@@ -12,17 +12,25 @@ import java.util.ArrayList;
  *
  * @author alexander
  */
-public class Arma extends AbstractObjeto implements IArma, IPrototype{
+public class Arma implements IArma{
+    protected String nombre;
     protected int alcance;
     protected int danno;
     protected int rango;
+    protected int nivel;
+    protected int nivelAparicion;
+    protected ArrayList<String> apariencia;
 
-    public Arma(String nombre, int vida, int nivel, ESTADO estado, int nivelAparicion, int costo, ArrayList<String> apariencia, Point posicion, int alcance, int danno, int rango) {
-        super(nombre, vida, nivel, estado, nivelAparicion, costo, apariencia, posicion);
+    public Arma(String nombre, int alcance, int danno, int rango, int nivel, int nivelAparicion, ArrayList<String> apariencia) {
+        this.nombre = nombre;
         this.alcance = alcance;
-        this.danno   = danno;
-        this.rango   = rango;
+        this.danno = danno;
+        this.rango = rango;
+        this.nivel = nivel;
+        this.nivelAparicion = nivelAparicion;
+        this.apariencia = apariencia;
     }
+    
 
     public int getAlcance() {
         return alcance;
@@ -49,13 +57,20 @@ public class Arma extends AbstractObjeto implements IArma, IPrototype{
     }
 
     @Override
-    public IPrototype clone() {
-        return new Arma(nombre, vida, nivel, estado, nivelAparicion, costo, apariencia, posicion, alcance, danno, rango);
+    public IPrototype clone() throws CloneNotSupportedException{
+        return (IPrototype)super.clone();
+        //return new Arma(nombre, vida, nivel, estado, nivelAparicion, costo, apariencia, posicion, alcance, danno, rango);
     }
 
     @Override
-    public IPrototype deepclone() {
-        return new Arma(nombre, vida, nivel, estado, nivelAparicion, costo, (ArrayList<String>)apariencia.clone(), (Point)posicion.clone(), alcance, danno, rango);
+    public IPrototype deepclone() throws CloneNotSupportedException {
+        return (IPrototype)super.clone();
+        //return new Arma(nombre, vida, nivel, estado, nivelAparicion, costo, (ArrayList<String>)apariencia.clone(), (Point)posicion.clone(), alcance, danno, rango);
+    }
+
+    @Override
+    public String toString() {
+        return "Arma{" + "nombre=" + nombre + ", alcance=" + alcance + ", danno=" + danno + ", rango=" + rango + ", nivel=" + nivel + ", nivelAparicion=" + nivelAparicion + ", apariencia=" + apariencia + '}';
     }
     
     
