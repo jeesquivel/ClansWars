@@ -25,8 +25,8 @@ public class Personaje extends AbstractObjeto implements IMovible, IPrototype<Pe
     
     private ArrayList<AbstractObjeto> enemigos;
 
-    public Personaje(String nombre, int vida, int nivel, ESTADO estado, int nivelAparicion, int costo, ArrayList<String> apariencia, Point posicion, double golpesSegundo, int campos, int velocidad) {
-        super(nombre, vida, nivel, estado, nivelAparicion, costo, apariencia, posicion);
+    public Personaje(String nombre, int vida, int nivel, int nivelMaximo, ESTADO estado, int nivelAparicion, int costo, ArrayList<String> apariencia, Point posicion, double golpesSegundo, int campos, int velocidad) {
+        super(nombre, vida, nivel, nivelMaximo, estado, nivelAparicion, costo, apariencia, posicion);
         this.golpesSegundo = golpesSegundo;
         this.campos        = campos;
         this.velocidad     = velocidad;
@@ -102,12 +102,12 @@ public class Personaje extends AbstractObjeto implements IMovible, IPrototype<Pe
     
     @Override
     public Personaje clonar() throws CloneNotSupportedException {
-       return new Personaje(nombre, vida, nivel, estado, nivelAparicion, costo, apariencia, posicion, golpesSegundo, campos, velocidad);
+       return new Personaje(nombre, vida, nivel, nivelMaximo, estado, nivelAparicion, costo, apariencia, posicion, golpesSegundo, campos, velocidad);
     }
 
     @Override
     public Personaje deepclonar() throws CloneNotSupportedException {
-        return new Personaje(nombre, vida, nivel, estado, nivelAparicion, costo, (ArrayList<String>)apariencia.clone(), (Point)posicion.clone(), golpesSegundo, campos, velocidad);
+        return new Personaje(nombre, vida, nivel, nivelMaximo, estado, nivelAparicion, costo, (ArrayList<String>)apariencia.clone(), (Point)posicion.clone(), golpesSegundo, campos, velocidad);
     }
     
 }

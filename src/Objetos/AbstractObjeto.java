@@ -18,16 +18,18 @@ public abstract class AbstractObjeto{
     protected String nombre;                    // Nombre que tendrá el objeto
     protected int vida;                         // Puntos de vida del objeto
     protected int nivel;                        // Nivel en el que está el objeto
+    protected int nivelMaximo;                  // Nivel máximo al que puede llegar este personaje
     protected ESTADO estado;                    // El estado actual del guerrero
     protected int nivelAparicion;               // Nivel del personaje a partir del cual se tendrá acceso al objeto
     protected int costo;                        // Costo en dinero del juego necesario para comprar el objeto
     protected ArrayList<String> apariencia;     // Lista de direcciones donde estarán las imágenes de este objeto
     protected Point posicion;                   // Posición en la cuadrícula donde está este objeto.
 
-    public AbstractObjeto(String nombre, int vida, int nivel, ESTADO estado, int nivelAparicion, int costo, ArrayList<String> apariencia, Point posicion) {
+    public AbstractObjeto(String nombre, int vida, int nivel, int nivelMaximo, ESTADO estado, int nivelAparicion, int costo, ArrayList<String> apariencia, Point posicion) {
         this.nombre = nombre;
         this.vida = vida;
         this.nivel = nivel;
+        this.nivelMaximo = nivelMaximo;
         this.estado = estado;
         this.nivelAparicion = nivelAparicion;
         this.costo = costo;
@@ -66,6 +68,14 @@ public abstract class AbstractObjeto{
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
+    
+    public int getNivelMaximo() {
+        return nivelMaximo;
+    }
+
+    public void setNivelMaximo(int nivelMaximo) {
+        this.nivelMaximo = nivelMaximo;
+    }
 
     public int getNivelAparicion() {
         return nivelAparicion;
@@ -101,7 +111,7 @@ public abstract class AbstractObjeto{
 
     @Override
     public String toString() {
-        return "AbstractObjeto{" + "nombre=" + nombre + ", vida=" + vida + ", nivel=" + nivel + ", estado=" + estado + ", nivelAparicion=" + nivelAparicion + ", costo=" + costo + ", apariencia=" + apariencia + ", posicion=" + posicion + '}';
+        return "AbstractObjeto{" + "nombre=" + nombre + ", vida=" + vida + ", nivel=" + nivel + ", nivelMaximo=" + nivelMaximo + ", estado=" + estado + ", nivelAparicion=" + nivelAparicion + ", costo=" + costo + ", apariencia=" + apariencia + ", posicion=" + posicion + '}';
     }
     
     

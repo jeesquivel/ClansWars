@@ -20,7 +20,7 @@ public class JsonDBArmas implements IBDArma {
 
     public JsonDBArmas()  {
         try {
-            this.jsonArmas = (JSONObject) cargarJson("/home/jeesquivel/Documentos/TEC/diseño/ClansWars/src/BaseDatos/Armas.json");
+            this.jsonArmas = (JSONObject) cargarJson("BaseDatos/Armas.json");
         } catch (Exception e) {
             e.printStackTrace();
         }
