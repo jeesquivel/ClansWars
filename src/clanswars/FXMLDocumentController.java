@@ -212,15 +212,6 @@ public class FXMLDocumentController implements Initializable {
             });
         }else
             boolImgArma = true;
-        
-    }
-    
-    private void setHeroeImage(){
-        imgHeroe1.setImage(imgHeroe);
-    }
-    
-    private void setArmaImage(){
-        imgArma1.setImage(imgArma);
     }
     
     private void loadImages(){
@@ -230,8 +221,8 @@ public class FXMLDocumentController implements Initializable {
     
     private void setImages(){
         if (boolImgArma && boolImgHeroe){ // Sólo si las dos imágenes ya están cargadas
-            setHeroeImage();
-            setArmaImage();
+            imgHeroe1.setImage(imgHeroe);
+            imgArma1.setImage(imgArma);
         }
     }
     
