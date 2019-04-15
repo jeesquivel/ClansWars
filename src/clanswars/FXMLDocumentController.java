@@ -184,7 +184,6 @@ public class FXMLDocumentController implements Initializable {
         boolImgHeroe = false;
         
         imgHeroe = new Image("/images/Heroes/" + strHeroe + "/" + strAccion + strHeroeNivel + ".gif");
-        System.out.println("/images/Heroes/" + strHeroe + "/" + strAccion + strHeroeNivel + ".gif");
 
         if (imgHeroe.getProgress() != 1){ // Si la imagen no se ha cargado espera hasta que se cargue
             imgHeroe.progressProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
