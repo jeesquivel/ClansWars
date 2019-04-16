@@ -5,8 +5,6 @@
  */
 package Objetos;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author alexander
@@ -18,6 +16,7 @@ public class Arma implements IArma{
     protected long danno;
     protected long rango;
     protected long nivel;
+    protected long nivelMaximo;
     protected long nivelAparicion;
     protected String apariencia;
 
@@ -30,8 +29,6 @@ public class Arma implements IArma{
         this.nivelAparicion = nivelAparicion;
         this.apariencia = apariencia;
     }
-    
-
 
     public long getAlcance() {
         return alcance;
@@ -80,4 +77,38 @@ public class Arma implements IArma{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public long getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(long nivel) {
+        this.nivel = nivel;
+    }
+
+    public long getNivelMaximo() {
+        return nivelMaximo;
+    }
+
+    public void setNivelMaximo(long nivelMaximo) {
+        this.nivelMaximo = nivelMaximo;
+    }
+
+    public long getNivelAparicion() {
+        return nivelAparicion;
+    }
+
+    public void setNivelAparicion(long nivelAparicion) {
+        this.nivelAparicion = nivelAparicion;
+    }
+
+    public String getApariencia() {
+        return apariencia;
+    }
+
+    public void setApariencia(String apariencia) {
+        this.apariencia = apariencia;
+    }
+    
+    
 }
