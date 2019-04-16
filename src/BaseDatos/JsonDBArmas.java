@@ -10,9 +10,12 @@ import Objetos.IArma;
 import Objetos.Personaje;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
+import sun.plugin2.liveconnect.JavaClass;
 
 import java.awt.*;
+import java.io.File;
 import java.io.FileReader;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -26,6 +29,7 @@ public class JsonDBArmas implements IBDArma {
         datos= new Data();
         try {
             this.jsonArmas = (JSONObject) cargarJson("/home/jeesquivel/Documentos/TEC/diseño/ClansWars/src/BaseDatos/Armas.json");
+            System.out.println(getClass().getResource("./Armas.json").getPath());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,7 +66,6 @@ public class JsonDBArmas implements IBDArma {
         for (Object i:atributos) {
             Map mapa = (Map) i;
             nombre = (String) mapa.get("name");
-            System.out.println(nombre);
             alcance = (long) mapa.get("alcance");
             danno = (long) mapa.get("danno");
             rango = (long) mapa.get("rango");
@@ -110,7 +113,6 @@ public class JsonDBArmas implements IBDArma {
 
             Personaje personaje = new Personaje(nombre,vida,nivel,nivelMaximo, AbstractObjeto.ESTADO.ESPERANDO, nivelAparicion,  costo, apariencia, punto,  golpesXsegundo,  campos,  velocidad);
 
-            System.out.println(personaje.toString());
 
 
             datos.addPersonaje(personaje);
