@@ -6,6 +6,7 @@
 package clanswars;
 
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -17,12 +18,14 @@ import Objetos.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 
@@ -31,7 +34,9 @@ import javafx.scene.image.Image;
  * @author alexander
  */
 public class FXMLDocumentController implements Initializable {
-    
+    MantenimientoArmas mantenimientoArmas;
+
+
     @FXML
     private ImageView imgHeroe1;
     @FXML
@@ -42,6 +47,8 @@ public class FXMLDocumentController implements Initializable {
     private ComboBox cmbHeroeNivel;
     @FXML
     private ComboBox cmbArma;
+    @FXML
+    private ComboBox EA_comboBox;
     @FXML
     private ComboBox cmbArmaNivel;
     @FXML
@@ -88,17 +95,18 @@ public class FXMLDocumentController implements Initializable {
         strAccion = (String)cmbAccion.getValue();
         LoadSetImages();
     }
-    
+
+
+
+
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        cmbHeroe.setItems(FXCollections.observableArrayList(
-                                    "Arquera",
-                                    "Barbaro",
-                                    "Enfermera",
-                                    "Mago",
-                                    "Soldado"
-                                ));
+
+        MantenimientoArmas mantenimientoArmas= MantenimientoArmas.getInstance();
+
         cmbHeroeNivel.setItems(FXCollections.observableArrayList(
                                     "1",
                                     "2",
@@ -106,15 +114,7 @@ public class FXMLDocumentController implements Initializable {
                                     "4",
                                     "5"
                                 ));
-        
-        cmbArma.setItems(FXCollections.observableArrayList(
-                                    "Manos",
-                                    "Espada",
-                                    "Mazo",
-                                    "Arco",
-                                    "Jeringa",
-                                    "Hechizo"
-                                ));
+
         cmbArmaNivel.setItems(FXCollections.observableArrayList(
                                     "1",
                                     "2",
@@ -122,19 +122,36 @@ public class FXMLDocumentController implements Initializable {
                                     "4",
                                     "5"
                                 ));
+
+
+
         cmbAccion.setItems(FXCollections.observableArrayList(
                                     "Atacando",
                                     "Caminando",
                                     "Detenido",
                                     "Muerto"
                                 ));
-        
+
+
+
+
+
+        for (Arma i:mantenimientoArmas.getArmeria()) {
+            cmbArma.getItems().add(i.getNombre());
+            EA_comboBox.getItems().add(i.getNombre());
+        }
+
+        for (IPrototype i:mantenimientoArmas.getPersonajes()) {
+            cmbHeroe.getItems().add(((Personaje) i).getNombre());
+        }
+
         cmbHeroe.getSelectionModel().select(0);
+        cmbArma.getSelectionModel().select(0);
         cmbHeroeNivel.getSelectionModel().select(0);
         cmbArma.getSelectionModel().select(0);
         cmbArmaNivel.getSelectionModel().select(0);
         cmbAccion.getSelectionModel().select(0);
-        
+
         strHeroe = (String)cmbHeroe.getValue();
         strHeroeNivel = (String)cmbHeroeNivel.getValue();
         strArma = (String)cmbArma.getValue();
@@ -143,15 +160,9 @@ public class FXMLDocumentController implements Initializable {
         
         LoadSetImages();
         
-        /*MantenimientoArmas mantenimientoArmas= MantenimientoArmas.getInstance();
 
+/*
 
-        ArrayList<IArma> armeria = (ArrayList<IArma>) mantenimientoArmas.cargarTodo();
-
-        for (IArma i:armeria) {
-            System.out.println(i.toString());
-
-        }
 
         Guerrero guerrero = new Guerrero(new Personaje("Arquera",500,1, AbstractObjeto.ESTADO.ESPERANDO,1,100,new ArrayList<>(),new Point(5,1), 0.5, 1, 100), new Arma("MataTodo", 5, 100, 0, 1, 1, ""));
         Guerrero guerrero2 = null;

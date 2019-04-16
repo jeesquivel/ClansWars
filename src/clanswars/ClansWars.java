@@ -25,8 +25,6 @@ public class ClansWars extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
 
 
-        //JsonDBArmas jsonDBArmas = (JsonDBArmas) new DBFactory().getDefaultDBArma();
-        //jsonDBArmas.cargarAramas();
 
         Scene scene = new Scene(root);
         stage.setScene(scene);

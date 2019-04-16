@@ -16,16 +16,16 @@ public abstract class AbstractObjeto{
     public enum ESTADO {ESPERANDO, AVANZANDO, ATACANDO, MUERTO}
     
     protected String nombre;                    // Nombre que tendrá el objeto
-    protected int vida;                         // Puntos de vida del objeto
-    protected int nivel;                        // Nivel en el que está el objeto
-    protected int nivelMaximo;                  // Nivel máximo al que puede llegar este personaje
+    protected long vida;                         // Puntos de vida del objeto
+    protected long nivel;                        // Nivel en el que está el objeto
+    protected long nivelMaximo;                  // Nivel máximo al que puede llegar este personaje
     protected ESTADO estado;                    // El estado actual del guerrero
-    protected int nivelAparicion;               // Nivel del personaje a partir del cual se tendrá acceso al objeto
-    protected int costo;                        // Costo en dinero del juego necesario para comprar el objeto
+    protected long nivelAparicion;               // Nivel del personaje a partir del cual se tendrá acceso al objeto
+    protected long costo;                        // Costo en dinero del juego necesario para comprar el objeto
     protected ArrayList<String> apariencia;     // Lista de direcciones donde estarán las imágenes de este objeto
     protected Point posicion;                   // Posición en la cuadrícula donde está este objeto.
 
-    public AbstractObjeto(String nombre, int vida, int nivel, int nivelMaximo, ESTADO estado, int nivelAparicion, int costo, ArrayList<String> apariencia, Point posicion) {
+    public AbstractObjeto(String nombre, long vida, long nivel, long nivelMaximo, ESTADO estado, long nivelAparicion, long costo, ArrayList<String> apariencia, Point posicion) {
         this.nombre = nombre;
         this.vida = vida;
         this.nivel = nivel;
@@ -45,7 +45,7 @@ public abstract class AbstractObjeto{
         this.nombre = nombre;
     }
 
-    public int getVida() {
+    public long getVida() {
         return vida;
     }
 
@@ -61,7 +61,7 @@ public abstract class AbstractObjeto{
         this.estado = estado;
     }
 
-    public int getNivel() {
+    public long getNivel() {
         return nivel;
     }
 
@@ -69,7 +69,7 @@ public abstract class AbstractObjeto{
         this.nivel = nivel;
     }
     
-    public int getNivelMaximo() {
+    public long getNivelMaximo() {
         return nivelMaximo;
     }
 
@@ -77,7 +77,7 @@ public abstract class AbstractObjeto{
         this.nivelMaximo = nivelMaximo;
     }
 
-    public int getNivelAparicion() {
+    public long getNivelAparicion() {
         return nivelAparicion;
     }
 
@@ -85,7 +85,7 @@ public abstract class AbstractObjeto{
         this.nivelAparicion = nivelAparicion;
     }
 
-    public int getCosto() {
+    public long getCosto() {
         return costo;
     }
 

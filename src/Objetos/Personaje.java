@@ -15,9 +15,9 @@ import java.util.ArrayList;
 public class Personaje extends AbstractObjeto implements IMovible, IPrototype<Personaje>{
     public enum TIPO {TERRESTRE, AEREO}
     
-    protected double golpesSegundo;         // Cantidad de veces que el guerrero ataca por segundo
-    protected int campos;                   // Campos que necesita el guerrero
-    protected int velocidad;                // Velocidad en que se mueve el guerrero
+    protected long golpesSegundo;         // Cantidad de veces que el guerrero ataca por segundo
+    protected long campos;                   // Campos que necesita el guerrero
+    protected long velocidad;                // Velocidad en que se mueve el guerrero
     
     
     protected AbstractObjeto objetivo;      // El objetivo actual del guerrero
@@ -25,7 +25,7 @@ public class Personaje extends AbstractObjeto implements IMovible, IPrototype<Pe
     
     private ArrayList<AbstractObjeto> enemigos;
 
-    public Personaje(String nombre, int vida, int nivel, int nivelMaximo, ESTADO estado, int nivelAparicion, int costo, ArrayList<String> apariencia, Point posicion, double golpesSegundo, int campos, int velocidad) {
+    public Personaje(String nombre, long vida, long nivel, long nivelMaximo, ESTADO estado, long nivelAparicion, long costo, ArrayList<String> apariencia, Point posicion, long golpesSegundo, long campos, long velocidad) {
         super(nombre, vida, nivel, nivelMaximo, estado, nivelAparicion, costo, apariencia, posicion);
         this.golpesSegundo = golpesSegundo;
         this.campos        = campos;
@@ -43,23 +43,23 @@ public class Personaje extends AbstractObjeto implements IMovible, IPrototype<Pe
         return golpesSegundo;
     }
 
-    public void setGolpesSegundo(double golpesSegundo) {
+    public void setGolpesSegundo(long golpesSegundo) {
         this.golpesSegundo = golpesSegundo;
     }
 
-    public int getCampos() {
+    public long getCampos() {
         return campos;
     }
 
-    public void setCampos(int campos) {
+    public void setCampos(long campos) {
         this.campos = campos;
     }
 
-    public int getVelocidad() {
+    public long getVelocidad() {
         return velocidad;
     }
 
-    public void setVelocidad(int velocidad) {
+    public void setVelocidad(long velocidad) {
         this.velocidad = velocidad;
     }
 
@@ -107,7 +107,7 @@ public class Personaje extends AbstractObjeto implements IMovible, IPrototype<Pe
 
     @Override
     public Personaje deepclonar() throws CloneNotSupportedException {
-        return new Personaje(nombre, vida, nivel, nivelMaximo, estado, nivelAparicion, costo, (ArrayList<String>)apariencia.clone(), (Point)posicion.clone(), golpesSegundo, campos, velocidad);
+        return new Personaje(nombre, vida, nivel, nivelMaximo, estado, nivelAparicion, costo, (ArrayList<String>)apariencia.clone(), (Point)posicion.clone(),  golpesSegundo, campos, velocidad);
     }
     
 }

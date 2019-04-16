@@ -5,9 +5,11 @@ package Constructores;
 
 
 import BaseDatos.JsonDBArmas;
-import Objetos.IArma;
+import Objetos.Arma;
+import Objetos.IPrototype;
 
 import java.util.ArrayList;
+
 
 public class MantenimientoArmas implements IMantenimiento{
     private static JsonDBArmas armeria;
@@ -23,7 +25,7 @@ public class MantenimientoArmas implements IMantenimiento{
 
 
     private  MantenimientoArmas()  {
-        armeria= (JsonDBArmas) new DBFactory().getDefaultDBArma();
+        armeria = (JsonDBArmas) new DBFactory().getDefaultDBArma();
     }
 
 
@@ -35,7 +37,7 @@ public class MantenimientoArmas implements IMantenimiento{
 
     @Override
     public Object cargarTodo() {
-        return armeria.getCatalogoArmas();
+        return armeria;
     }
 
     @Override
@@ -52,4 +54,15 @@ public class MantenimientoArmas implements IMantenimiento{
     public void borrar() {
 
     }
+
+    public ArrayList<Arma> getArmeria(){
+        return armeria.getData().getArmas();
+    }
+
+
+    public ArrayList<IPrototype> getPersonajes(){
+        return armeria.getData().getPersonajes();
+    }
+
+
 }
