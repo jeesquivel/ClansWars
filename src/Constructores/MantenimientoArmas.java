@@ -4,17 +4,18 @@ package Constructores;
 
 
 
+import BaseDatos.Data;
 import BaseDatos.JsonDBArmas;
 import Objetos.Arma;
 import Objetos.IPrototype;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class MantenimientoArmas implements IMantenimiento{
     private static JsonDBArmas armeria;
     private static  MantenimientoArmas mantenimientoArmas;
-
 
 
     public static  MantenimientoArmas getInstance() {
@@ -23,11 +24,13 @@ public class MantenimientoArmas implements IMantenimiento{
         return mantenimientoArmas;
     }
 
-
     private  MantenimientoArmas()  {
         armeria = (JsonDBArmas) new DBFactory().getDefaultDBArma();
     }
 
+    public static void setArmeria(JsonDBArmas armeria) {
+        MantenimientoArmas.armeria = armeria;
+    }
 
 
     @Override
@@ -55,10 +58,14 @@ public class MantenimientoArmas implements IMantenimiento{
 
     }
 
-    public ArrayList<Arma> getArmeria(){
-        return armeria.getData().getArmas();
+    @Override
+    public void editarArma(Arma arma) {
+        armeria.getData().getArmasHash().put(arma.getNombre(), arma);
     }
 
+    public Data getDatos(){
+        return armeria.getData();
+    }
 
     public ArrayList<IPrototype> getPersonajes(){
         return armeria.getData().getPersonajes();

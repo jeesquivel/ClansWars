@@ -1,6 +1,8 @@
 package Constructores;
 
 
+import Objetos.Arma;
+
 /**
  * @author jeesquivel
  */
@@ -12,4 +14,5 @@ public interface IMantenimiento {
     public void cargar();
     public void insertar();
     public void borrar();
+    void editarArma(Arma arma);
 }

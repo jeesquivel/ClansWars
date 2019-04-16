@@ -10,12 +10,9 @@ import Objetos.IArma;
 import Objetos.Personaje;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
-import sun.plugin2.liveconnect.JavaClass;
 
 import java.awt.*;
-import java.io.File;
 import java.io.FileReader;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -28,12 +25,11 @@ public class JsonDBArmas implements IBDArma {
     public JsonDBArmas()  {
         datos= new Data();
         try {
-            this.jsonArmas = (JSONObject) cargarJson("/home/jeesquivel/Documentos/TEC/diseño/ClansWars/src/BaseDatos/Armas.json");
-            System.out.println(getClass().getResource("./Armas.json").getPath());
+            this.jsonArmas = (JSONObject) cargarJson(getClass().getResource("./Armas.json").getPath().toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        cargarAramas();
+        cargarArmas();
         cargarPersonajes();
     }
 
@@ -51,7 +47,7 @@ public class JsonDBArmas implements IBDArma {
     }
 
     @Override
-    public void cargarAramas() {
+    public void cargarArmas() {
         String nombre;
         long alcance;
         long danno;
@@ -71,13 +67,12 @@ public class JsonDBArmas implements IBDArma {
             rango = (long) mapa.get("rango");
             nivel = (long) mapa.get("nivel");
             nivelAparicion = (long) mapa.get("nivelAparicion");
-            apariencia = (String) mapa.get("apariencia");
+            apariencia = (String) mapa.get("apariencia"); // url de la carpeta
 
             Arma arma = new Arma(nombre, alcance, danno, rango, nivel, nivelAparicion, apariencia);
             datos.addArma(arma); // agrega un armaal arreglo de armas
-
-
         }
+
     }
 
     @Override
@@ -112,11 +107,9 @@ public class JsonDBArmas implements IBDArma {
             golpesXsegundo=(long) mapa.get("golpesXsegundo");
 
             Personaje personaje = new Personaje(nombre,vida,nivel,nivelMaximo, AbstractObjeto.ESTADO.ESPERANDO, nivelAparicion,  costo, apariencia, punto,  golpesXsegundo,  campos,  velocidad);
-
-
-
             datos.addPersonaje(personaje);
         }
+
     }
 
 

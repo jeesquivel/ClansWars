@@ -1,0 +1,138 @@
+{
+  "armeria":[
+    {
+      "name":"Arco",
+      "alcance": 931,
+      "danno": 1,
+      "rango": 1,
+      "nivel": 2,
+      "nivelAparicion": 1,
+      "apariencia": "url"
+    },
+    {
+      "name": "Espada",
+      "alcance": 310,
+      "danno": 1,
+      "rango": 1,
+      "nivel": 4,
+      "nivelAparicion": 1,
+      "apariencia": "url"
+    },
+    {
+      "name": "Manos",
+      "alcance": 3,
+      "danno": 1,
+      "rango": 1,
+      "nivel": 5,
+      "nivelAparicion": 1,
+      "apariencia": "url"
+    },
+    {
+      "name": "Mazo",
+      "alcance": 1,
+      "danno": 1,
+      "rango": 10,
+      "nivel": 2,
+      "nivelAparicion": 1,
+      "apariencia": "url"
+    }
+  ],
+
+  "Personajes":[
+    {
+      "nombre": "Arquera",
+      "vida": 100,
+      "nivel": 1,
+      "nivelMaximo": 5,
+      "nivelAparicion": 2,
+      "costo": 1000,
+      "apariencia": [{
+        "caminando": "url",
+        "atacando": "url",
+        "detenido": "url",
+        "muerto": "url"
+      }],
+      "x": 0,
+      "y": 0,
+      "velocidad": 1,
+      "campos": 1,
+      "golpesXsegundo": 1
+    },
+    {
+      "nombre": "Barbaro",
+      "vida": 100,
+      "nivel": 1,
+      "nivelMaximo": 5,
+      "nivelAparicion": 2,
+      "costo": 1000,
+      "apariencia": [{
+        "caminando": "url",
+        "atacando": "url",
+        "detenido": "url",
+        "muerto": "url"
+      }],
+      "x": 0,
+      "y": 0,
+      "velocidad": 1,
+      "campos": 1,
+      "golpesXsegundo": 1
+    },
+    {
+      "nombre": "Enfermera",
+      "vida": 100,
+      "nivel": 1,
+      "nivelMaximo": 5,
+      "nivelAparicion": 2,
+      "costo": 1000,
+      "apariencia": [{
+        "caminando": "url",
+        "atacando": "url",
+        "detenido": "url",
+        "muerto": "url"
+      }],
+      "x": 0,
+      "y": 0,
+      "velocidad": 1,
+      "campos": 1,
+      "golpesXsegundo": 1
+    },
+    {
+      "nombre": "Mago",
+      "vida": 100,
+      "nivel": 1,
+      "nivelMaximo": 5,
+      "nivelAparicion": 2,
+      "costo": 1000,
+      "apariencia": [{
+        "caminando": "url",
+        "atacando": "url",
+        "detenido": "url",
+        "muerto": "url"
+      }],
+      "x": 0,
+      "y": 0,
+      "velocidad": 1,
+      "campos": 1,
+      "golpesXsegundo": 1
+    },
+    {
+      "nombre": "Soldado",
+      "vida": 100,
+      "nivel": 4,
+      "nivelMaximo": 5,
+      "nivelAparicion": 2,
+      "costo": 1000,
+      "apariencia": [{
+        "caminando": "url",
+        "atacando": "url",
+        "detenido": "url",
+        "muerto": "url"
+      }],
+      "x": 0,
+      "y": 0,
+      "velocidad": 1,
+      "campos": 1,
+      "golpesXsegundo": 1
+    }
+  ]
+}
