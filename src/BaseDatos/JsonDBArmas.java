@@ -62,6 +62,7 @@ public class JsonDBArmas implements IBDArma {
     public void cargarArmas() {
 
         String nombre;
+        String tipo;
         long nivel;
         long nivelMaximo ;
         long nivelAparicion;
@@ -77,6 +78,7 @@ public class JsonDBArmas implements IBDArma {
         for (Object i:atributos) {
             Map armaAux = (Map) i;
             nombre = (String) armaAux.get("nombre");
+            tipo= (String) armaAux.get("tipo");
             nivel= (long) armaAux.get("nivel");
             nivelMaximo= (long) armaAux.get("nivelMaximo");
             nivelAparicion= (long) armaAux.get("nivelAparicion");
@@ -88,7 +90,7 @@ public class JsonDBArmas implements IBDArma {
 
                 // arreglar esta mierda y poner un patron de disenno
 
-            Arma arma  = new Arma(nombre, alcance, danno, rango, nivel,nivelMaximo, nivelAparicion,apariencia,puedeUsar);
+            Arma arma  = new Arma(nombre, tipo,alcance, danno, rango, nivel,nivelMaximo, nivelAparicion,apariencia,puedeUsar);
             datos.addArma(arma); // agrega un armaal arreglo de armas
         }
     }

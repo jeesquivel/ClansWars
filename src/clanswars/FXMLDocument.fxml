@@ -47,6 +47,7 @@
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints maxHeight="1.7976931348623157E308" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
                       <RowConstraints maxHeight="1.7976931348623157E308" valignment="CENTER" vgrow="ALWAYS" />
                         <RowConstraints maxHeight="1.7976931348623157E308" valignment="CENTER" vgrow="ALWAYS" />
                         <RowConstraints maxHeight="1.7976931348623157E308" valignment="CENTER" vgrow="ALWAYS" />
@@ -58,28 +59,30 @@
                         <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="0.0" valignment="CENTER" vgrow="ALWAYS" />
                     </rowConstraints>
                      <children>
-                        <Label text="Nombre:" />
-                        <Label text="Alcance:" GridPane.rowIndex="1" />
-                        <Label text="Danno:" GridPane.rowIndex="2" />
-                        <Label text="Rango:" GridPane.rowIndex="3" />
-                        <Label text="Nivel del arma:" GridPane.rowIndex="4" />
-                        <Label prefHeight="23.0" prefWidth="126.0" text="Nivel maximo:" GridPane.rowIndex="5" />
-                        <Label text="Apariencia:" GridPane.rowIndex="8" />
+                        <Label text="Alcance:" GridPane.rowIndex="2" />
+                        <Label text="Danno:" GridPane.rowIndex="3" />
+                        <Label text="Rango:" GridPane.rowIndex="4" />
+                        <Label text="Nivel del arma:" GridPane.rowIndex="5" />
+                        <Label prefHeight="23.0" prefWidth="126.0" text="Nivel maximo:" GridPane.rowIndex="6" />
+                        <Label text="Apariencia:" GridPane.rowIndex="9" />
                         <TextField fx:id="EA_edtNombre" GridPane.columnIndex="1" />
-                        <TextField fx:id="EA_edtAlcance" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField fx:id="EA_edtDanno" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="EA_edtRango" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <TextField fx:id="EA_edtNivel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <TextField fx:id="EA_edtNivelMaximo" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="8" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                        <TextField fx:id="EA_edtAlcance" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="EA_edtDanno" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="EA_edtRango" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextField fx:id="EA_edtNivel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <TextField fx:id="EA_edtNivelMaximo" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="9" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                            <children>
                               <TextField fx:id="EA_edtApariencia" nodeOrientation="LEFT_TO_RIGHT" prefHeight="26.0" prefWidth="306.0" HBox.hgrow="SOMETIMES" />
                               <Button mnemonicParsing="false" onAction="#handleBuscarUrl" prefHeight="26.0" prefWidth="114.0" text="URL carpeta" textFill="#498d05" />
                            </children></HBox>
-                        <Label text="Nivel de aparicion:" GridPane.rowIndex="6" />
-                        <TextField fx:id="EA_edtNivelAparicion" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Label text="Quien puede usar el arma" GridPane.rowIndex="7" />
-                        <TextField fx:id="EA_edtPuedeUsar" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label text="Nivel de aparicion:" GridPane.rowIndex="7" />
+                        <TextField fx:id="EA_edtNivelAparicion" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label text="Quien puede usar el arma" GridPane.rowIndex="8" />
+                        <TextField fx:id="EA_edtPuedeUsar" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Label text="Nombre:" />
+                        <Label text="Tipo:" GridPane.rowIndex="1" />
+                        <TextField fx:id="EA_edtTipo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                   <Button fx:id="EA_btnGuardar" layoutX="585.0" layoutY="457.0" mnemonicParsing="false" onAction="#handleGuardarArma" text="Guardar" />

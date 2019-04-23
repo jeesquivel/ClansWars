@@ -80,6 +80,8 @@ public class FXMLDocumentController implements Initializable {
     private Label EA_labelQuienUsaArma;
     @FXML
     private TextField EA_edtPuedeUsar;
+    @FXML
+    private TextField EA_edtTipo;
 
 
 
@@ -145,6 +147,7 @@ public class FXMLDocumentController implements Initializable {
         strArma= (String) EA_cmbSeleccionArma.getValue();
         Arma arma= mantenimientoArmas.getDatos().getArmas().get(strArma);
         EA_edtNombre.setText(arma.getNombre());
+        EA_edtTipo.setText(arma.getTipo());
         EA_edtAlcance.setText(String.valueOf(arma.getAlcance()));
         EA_edtDanno.setText(String.valueOf(arma.getDanno()));
         EA_edtRango.setText(String.valueOf(arma.getRango()));
@@ -153,6 +156,7 @@ public class FXMLDocumentController implements Initializable {
         EA_edtNivelAparicion.setText(String.valueOf(arma.getNivelAparicion()));
         EA_edtApariencia.setText(String.valueOf(arma.getApariencia()));
         EA_edtPuedeUsar.setText(arma.getPuedeUsar());
+
         Image imagen =  new Image(arma.getApariencia()+"Atacando"+arma.getNivel() +".gif");
         EA_ImageViewArma.setImage(imagen);
     }
@@ -198,13 +202,14 @@ public class FXMLDocumentController implements Initializable {
             long nivelMaximo= Long.parseLong(EA_edtNivelMaximo.getText());
             String apariencia= EA_edtApariencia.getText();
             String puedeUsar= EA_edtPuedeUsar.getText();
+            String tipo=EA_edtTipo.getText();
 
 
             //agregar un patron de disenno creaconal
 
 
             ArmasFactory armasFactory= new ArmasFactory();
-            IArma arma= armasFactory.crearArma("ATAQUE",nombre,alcance,danno,rango,nivel,nivelMaximo,nivelAparicion,apariencia,puedeUsar);
+            IArma arma= armasFactory.crearArma(nombre,tipo,alcance,danno,rango,nivel,nivelMaximo,nivelAparicion,apariencia,puedeUsar);
 
 
             mantenimientoArmas.editarArma((Arma) arma);
@@ -246,6 +251,7 @@ public class FXMLDocumentController implements Initializable {
     private void limpiarPantallaEA(){
         EA_edtAlcance.clear();
         EA_edtDanno.clear();
+        EA_edtTipo.clear();
         EA_edtNombre.clear();
         EA_edtApariencia.clear();
         EA_edtNivel.clear();
@@ -299,7 +305,7 @@ public class FXMLDocumentController implements Initializable {
         PersonajeFactory personajeFactory = new PersonajeFactory();
 
 
-        Personaje personaje = personajeFactory.crearPersonaje("BARBARO",nombre,vida,nivel,nivelMaximo, AbstractObjeto.ESTADO.ESPERANDO,
+        Personaje personaje = personajeFactory.crearPersonaje("TERRESTRE",nombre,vida,nivel,nivelMaximo, AbstractObjeto.ESTADO.ESPERANDO,
                 nivelAparicion,costo,apariencia,golpes,campos,velocidad);
 
         mantenimientoArmas.getPersonajes().put(nombre,personaje);
