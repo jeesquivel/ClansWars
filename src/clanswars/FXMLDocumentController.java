@@ -5,30 +5,25 @@
  */
 package clanswars;
 
-import java.awt.*;
-import java.lang.reflect.Array;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import Constructores.MantenimientoArmas;
 import Objetos.*;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+
+import java.awt.*;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -38,22 +33,16 @@ public class FXMLDocumentController implements Initializable {
     MantenimientoArmas mantenimientoArmas=MantenimientoArmas.getInstance();
 
 
+
+    @FXML
+    private AnchorPane tabPane;
     @FXML
     private ImageView imgHeroe1;
     @FXML
     private ImageView imgArma1;
     @FXML
     private ComboBox cmbHeroe;
-    @FXML
-    private ComboBox cmbHeroeNivel;
-    @FXML
-    private ComboBox cmbArma;
 
-    @FXML
-    private ComboBox cmbArmaNivel;
-    @FXML
-    private ComboBox cmbAccion;
-    
     private String strHeroe, strArma, strHeroeNivel, strArmaNivel, strAccion;
     private Image imgHeroe;
     private Image imgArma;
@@ -62,8 +51,9 @@ public class FXMLDocumentController implements Initializable {
 
 
     //segundo tab
+
     @FXML
-    private ComboBox EA_comboBox;
+    private ComboBox EA_cmbSeleccionArma;
     @FXML
     private TextField EA_edtNombre;
     @FXML
@@ -75,171 +65,300 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextField EA_edtNivel;
     @FXML
-    private TextField EA_edtNivelAparicion;
-    @FXML
     private TextField EA_edtApariencia;
     @FXML
-    private ImageView ED_ImageViewArma;
+    private TextField EA_edtNivelAparicion;
+    @FXML
+    private TextField EA_edtNivelMaximo;
+    @FXML
+    private ImageView EA_ImageViewArma;
+    @FXML
+    private Label EA_labelSeleccionarArma;
 
 
+    // tercer tab
+
+    @FXML
+    private Label EP_labelSeleccionarPersonaje;
+    @FXML
+    private Label EP_labelSeleccionarAccion;
+    @FXML
+    private Label EP_labelSeleccionarNivel;
+    @FXML
+    private ImageView EP_ImageView;
+    @FXML
+    private TextField EP_edtNombre;
+    @FXML
+    private TextField EP_edtVida;
+    @FXML
+    private TextField EP_edtNivel;
+    @FXML
+    private TextField EP_edtNivelMaximo;
+    @FXML
+    private TextField EP_edtNivelAparicion;
+    @FXML
+    private TextField EP_edtVelocidad;
+    @FXML
+    private TextField EP_edtCampos;
+    @FXML
+    private TextField EP_edtGolpes;
+    @FXML
+    private TextField EP_edtCosto;
+    @FXML
+    private TextField EP_edtApariencia;
+    @FXML
+    private ComboBox EP_cmbSeleccionarPersonaje;
+    @FXML
+    private ComboBox EP_cmbSeleccionarAccion;
+    @FXML
+    private ComboBox EP_cmbSeleccionarNivel;
+
+    // CUARTO TAB
+    @FXML
+    private ComboBox CG_cmbArma;
+    @FXML
+    private ComboBox CG_cmbHeroe;
+    @FXML
+    private ComboBox CG_cmbAccion;
+    @FXML
+    private ComboBox CG_cmbNivel;
 
 
+    @FXML
+    private ImageView CG_ImageViewHeroe;
+    @FXML
+    private ImageView CG_ImageViewArma;
 
-    
-    @FXML
-    private void handlebtnRotar(ActionEvent event) {
-        imgHeroe1.setRotate(imgHeroe1.getRotate() + 5);
-        imgArma1.setRotate(imgArma1.getRotate() + 5);
-    }
-    
-    @FXML
-    private void handlecmbHeroe(ActionEvent event) {
-        strHeroe = (String)cmbHeroe.getValue();
-        LoadSetImages();
-    }
-    
-    @FXML
-    private void handlecmbHeroeNivel(ActionEvent event) {
-        strHeroeNivel = (String)cmbHeroeNivel.getValue();
-        LoadSetImages();
-    }
-    
-    @FXML
-    private void handlecmbArma(ActionEvent event) {
-        strArma = (String)cmbArma.getValue();
-        LoadSetImages();
-    }
-    
-    @FXML
-    private void handlecmbArmaNivel(ActionEvent event) {
-        strArmaNivel = (String)cmbArmaNivel.getValue();
-        LoadSetImages();
-    }
-    
-    @FXML
-    private void handlecmbAccion(ActionEvent event) {
-        strAccion = (String)cmbAccion.getValue();
-        LoadSetImages();
-    }
+
 
 
     @FXML
     private void handleEA_comboBox(ActionEvent event){
-        strArma= (String) EA_comboBox.getValue();
-        Arma arma= mantenimientoArmas.getDatos().getArmasHash().get(strArma);
+        strArma= (String) EA_cmbSeleccionArma.getValue();
+        Arma arma= mantenimientoArmas.getDatos().getArmas().get(strArma);
         EA_edtNombre.setText(arma.getNombre());
         EA_edtAlcance.setText(String.valueOf(arma.getAlcance()));
         EA_edtDanno.setText(String.valueOf(arma.getDanno()));
         EA_edtRango.setText(String.valueOf(arma.getRango()));
         EA_edtNivel.setText(String.valueOf(arma.getNivel()));
+        EA_edtNivelMaximo.setText(String.valueOf(arma.getNivelMaximo()));
         EA_edtNivelAparicion.setText(String.valueOf(arma.getNivelAparicion()));
         EA_edtApariencia.setText(String.valueOf(arma.getApariencia()));
-        Image imagen =  new Image("/images/Armas/" + strArma + "/" + "Atacando"+arma.getNivel() +".gif");
-        ED_ImageViewArma.setImage(imagen);
+        Image imagen =  new Image(arma.getApariencia()+"Atacando"+arma.getNivel() +".gif");
+        EA_ImageViewArma.setImage(imagen);
+    }
+
+/*
+        METODOS DEL SEGUNDP TAB
+ */
+
+    @FXML
+    private void handleBuscarUrl(ActionEvent event) throws MalformedURLException {
+        String url;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Buscador de imagen");
+        File file =fileChooser.showOpenDialog(tabPane.getScene().getWindow());
+        if(file!=null) {
+            url= String.valueOf(file.toURI().toURL());
+            imgArma = new Image(url);
+            EA_ImageViewArma.setImage(imgArma);
+            EA_edtApariencia.setText(String.valueOf(file.toURI().toURL()));
+        }
+    }
+
+    @FXML
+    private void handleCrearNuevaArma(ActionEvent event){
+        EA_labelSeleccionarArma.setVisible(false);
+        EA_cmbSeleccionArma.setVisible(false);
+        EA_ImageViewArma.setImage(null);
+        limpiarPantallaEA();
     }
 
 
     @FXML
-    private void handleGuardar(ActionEvent event){
-        String nombre= EA_edtNombre.getText();
-        long alcance= Long.parseLong(EA_edtAlcance.getText());
-        long danno= Long.parseLong(EA_edtDanno.getText());
-        long rango= Long.parseLong(EA_edtRango.getText());
-        long nivel= Long.parseLong(EA_edtNivel.getText());
-        long nivelParicion = Long.parseLong(EA_edtNivelAparicion.getText());
-        String apariencia= EA_edtApariencia.getText();
+    private void handleGuardarArma(ActionEvent event){
 
-        Arma arma= new Arma(nombre,alcance,danno,rango,nivel,nivelParicion,apariencia);
+            String nombre= EA_edtNombre.getText();
+            long alcance= Long.parseLong(EA_edtAlcance.getText());
+            long danno= Long.parseLong(EA_edtDanno.getText());
+            long rango= Long.parseLong(EA_edtRango.getText());
+            long nivel= Long.parseLong(EA_edtNivel.getText());
+            long nivelAparicion= Long.parseLong(EA_edtNivelAparicion.getText());
+            long nivelMaximo= Long.parseLong(EA_edtNivelMaximo.getText());
+            String apariencia= EA_edtApariencia.getText();
 
-        mantenimientoArmas.editarArma(arma);
-        cargarPantallas();
 
+            //agregar un patron de disenno creaconal
+            Arma arma= new Arma(nombre,alcance,danno,rango,nivel,nivelMaximo,nivelAparicion,apariencia);
+
+            mantenimientoArmas.editarArma(arma);
+            actualizarComboBoxes();
+
+
+            EA_cmbSeleccionArma.setVisible(true);
+            EA_labelSeleccionarArma.setVisible(true);
+
+
+    }
+
+
+    private void limpiarPantallaEA(){
+        EA_edtAlcance.clear();
+        EA_edtDanno.clear();
+        EA_edtNombre.clear();
+        EA_edtApariencia.clear();
+        EA_edtNivel.clear();
+        EA_edtRango.clear();
+        EA_edtNivelAparicion.clear();
+        EA_edtNivelMaximo.clear();
+    }
+
+
+/*
+        METODOS DEL TERCER TAB
+ */
+
+
+
+    @FXML
+    private void handleEP_comboBox(ActionEvent event){
+        strHeroe= (String) EP_cmbSeleccionarPersonaje.getValue();
+        Personaje personaje= (Personaje) mantenimientoArmas.getDatos().getPersonajes().get(strHeroe);
+        EP_edtNombre.setText(personaje.getNombre());
+        EP_edtVelocidad.setText(String.valueOf(personaje.getVelocidad()));
+        EP_edtVida.setText(String.valueOf(personaje.getVida()));
+        EP_edtNivel.setText(String.valueOf(personaje.getNivel()));
+        EP_edtNivelAparicion.setText(String.valueOf(personaje.getNivelAparicion()));
+        EP_edtCosto.setText(String.valueOf(personaje.getCosto()));
+        EP_edtApariencia.setText(personaje.getApariencia());
+        EP_edtCampos.setText(String.valueOf(personaje.getCampos()));
+        EP_edtGolpes.setText(String.valueOf(personaje.getGolpesSegundo()));
+        EP_edtNivelMaximo.setText(String.valueOf(personaje.getNivelMaximo()));
+        Image imagen =  new Image(personaje.getApariencia()+EP_cmbSeleccionarAccion.getValue()+EP_cmbSeleccionarNivel.getValue()+".gif");
+        EP_ImageView.setImage(imagen);
+        EP_ImageView.setRotate(180);
+    }
+
+    @FXML
+    private void handleGuardarPersonaje(ActionEvent event){
+        String nombre= EP_edtNombre.getText();
+        long velocidad = Long.parseLong(EP_edtVelocidad.getText());
+        long vida = Long.parseLong(EP_edtVida.getText());
+        long nivel= Long.parseLong(EP_edtNivel.getText());
+        long nivelAparicion= Long.parseLong(EP_edtNivelAparicion.getText());
+        long costo = Long.parseLong(EP_edtCosto.getText());
+        String apariencia = EP_edtApariencia.getText();
+        long campos= Long.parseLong(EP_edtCampos.getText());
+        long golpes= Long.parseLong(EP_edtGolpes.getText());
+        long nivelMaximo= Long.parseLong(EP_edtNivelMaximo.getText());
+
+
+
+        Point punto = new Point(0,0);
+        Personaje p= new Personaje(nombre,vida,nivel,nivelMaximo, AbstractObjeto.ESTADO.ESPERANDO,
+                nivelAparicion,costo,apariencia,punto,golpes,campos,velocidad);
+        mantenimientoArmas.getPersonajes().put(nombre,p);
+        actualizarComboBoxes();
+
+
+
+        EP_labelSeleccionarAccion.setVisible(true);
+        EP_labelSeleccionarPersonaje.setVisible(true);
+        EP_labelSeleccionarNivel.setVisible(true);
+        EP_cmbSeleccionarNivel.setVisible(true);
+        EP_cmbSeleccionarAccion.setVisible(true);
+        EP_cmbSeleccionarPersonaje.setVisible(true);
+
+
+    }
+
+
+
+
+    @FXML
+    private void handleBuscarUrlPersonaje(ActionEvent event) throws MalformedURLException {
+        String url;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Buscador de imagen");
+        File file =fileChooser.showOpenDialog(tabPane.getScene().getWindow());
+        if(file!=null) {
+            url= String.valueOf(file.toURI().toURL());
+            imgArma = new Image(url);
+            EP_ImageView.setImage(imgArma);
+            EP_edtApariencia.setText(String.valueOf(file.toURI().toURL()));
         }
+    }
+
+
+
+    @FXML
+    private  void handleEP_crearPersonaje(ActionEvent event){
+        limparPantallaEP();
+        EP_labelSeleccionarAccion.setVisible(false);
+        EP_labelSeleccionarPersonaje.setVisible(false);
+        EP_labelSeleccionarNivel.setVisible(false);
+        EP_cmbSeleccionarNivel.setVisible(false);
+        EP_cmbSeleccionarAccion.setVisible(false);
+        EP_cmbSeleccionarPersonaje.setVisible(false);
+    }
 
 
 
 
+
+    private void limparPantallaEP(){
+        EP_edtNivelMaximo.clear();
+        EP_edtNombre.clear();
+        EP_edtNivel.clear();
+        EP_edtCosto.clear();
+        EP_edtVelocidad.clear();
+        EP_edtVida.clear();
+        EP_edtNivelAparicion.clear();
+        EP_edtApariencia.clear();
+        EP_edtCampos.clear();
+        EP_edtGolpes.clear();
+        EP_ImageView.setImage(null);
+    }
+
+
+    /*
+    METODOS DEL CUARTO TAB
+     */
+
+
+
+    @FXML
+    private void handleCP_comboBoxesActivity(ActionEvent even){
+        String nombrePersonaje= (String) CG_cmbHeroe.getValue();
+        String nombreArma= (String) CG_cmbArma.getValue();
+        String nivel= String.valueOf(CG_cmbNivel.getValue());
+        String accion = (String) CG_cmbAccion.getValue();
+        LoadSetImages(nombrePersonaje,nombreArma,nivel,accion);
+    }
+
+
+    @FXML
+    private void handleGuardarGuerrero(ActionEvent event){
+        IPrototype p= mantenimientoArmas.getPersonajes().get(CG_cmbHeroe.getValue());
+        Arma arma= mantenimientoArmas.getDatos().getArmas().get(CG_cmbArma.getValue());
+
+
+
+    }
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-
-        cmbHeroeNivel.setItems(FXCollections.observableArrayList(
-                                    "1",
-                                    "2",
-                                    "3",
-                                    "4",
-                                    "5"
-                                ));
-
-        cmbArmaNivel.setItems(FXCollections.observableArrayList(
-                                    "1",
-                                    "2",
-                                    "3",
-                                    "4",
-                                    "5"
-                                ));
-
-
-
-        cmbAccion.setItems(FXCollections.observableArrayList(
-                                    "Atacando",
-                                    "Caminando",
-                                    "Detenido",
-                                    "Muerto"
-                                ));
-
-
-
-
-
-
-
-
-
-
         cargarPantallas();
-
-
-
-        
-
-/*
-
-
-        Guerrero guerrero = new Guerrero(new Personaje("Arquera",500,1, AbstractObjeto.ESTADO.ESPERANDO,1,100,new ArrayList<>(),new Point(5,1), 0.5, 1, 100), new Arma("MataTodo", 5, 100, 0, 1, 1, ""));
-        Guerrero guerrero2 = null;
-        try {
-            guerrero2 = (Guerrero)guerrero.deepclonar();
-        } catch (CloneNotSupportedException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(0);
-        }
-
-        if (guerrero2 != null){
-
-            System.out.println(guerrero.toString());
-            System.out.println(guerrero2.toString());
-
-            guerrero2.getPersonaje().setCosto(0);
-            guerrero2.getPersonaje().setPosicion(new Point(1,10));
-
-            System.out.println(guerrero.toString());
-            System.out.println(guerrero2.toString());
-        }*/
-
-
-
-
-
 
     }
     
-    private void loadHeroeImage(){
+    private void loadHeroeImage(String name, String nivel,String accion){
         boolImgHeroe = false;
-        imgHeroe = new Image("/images/Heroes/" + strHeroe + "/" + strAccion + strHeroeNivel + ".gif");
+        Personaje p= (Personaje) mantenimientoArmas.getPersonajes().get(name);
+        imgHeroe = new Image(p.getApariencia()+nivel +  accion+".gif");
 
         if (imgHeroe.getProgress() != 1){ // Si la imagen no se ha cargado espera hasta que se cargue
             imgHeroe.progressProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
@@ -253,11 +372,11 @@ public class FXMLDocumentController implements Initializable {
           
     }
     
-    private void loadArmaImage(){
+    private void loadArmaImage(String nameArma,String nivel, String accion){
         boolImgArma = false;
+        Arma a= mantenimientoArmas.getDatos().getArmas().get(nameArma);
         
-        imgArma = new Image("/images/Armas/" + strArma + "/" + strAccion + strArmaNivel + ".gif");
-        
+        imgArma = new Image(a.getApariencia()+nivel+accion+".gif");
         if (imgArma.getProgress() != 1){ // Si la imagen no se ha cargado espera hasta que se cargue
             imgArma.progressProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
                 if ((double)newValue == 1) {
@@ -269,20 +388,22 @@ public class FXMLDocumentController implements Initializable {
             boolImgArma = true;
     }
     
-    private void loadImages(){
-        loadHeroeImage();
-        loadArmaImage();
+    private void loadImages(String  p, String  a,String nivel,String accion){
+        loadHeroeImage(p,accion,nivel);
+        loadArmaImage(a,accion,nivel);
     }
     
     private void setImages(){
         if (boolImgArma && boolImgHeroe){ // Sólo si las dos imágenes ya están cargadas
-            imgHeroe1.setImage(imgHeroe);
-            imgArma1.setImage(imgArma);
+            CG_ImageViewHeroe.setImage(imgHeroe);
+            CG_ImageViewArma.setRotate(180);
+            CG_ImageViewArma.setImage(imgArma);
+            CG_ImageViewHeroe.setRotate(180);
         }
     }
     
-    private void LoadSetImages(){
-        loadImages();
+    private void LoadSetImages(String p,String a,String nivel,String accion){
+        loadImages(p,a,nivel,accion);
         setImages();
     }
 
@@ -291,51 +412,73 @@ public class FXMLDocumentController implements Initializable {
     // metodo futuro para cargar
     public void cargarPantallas(){
 
-        for (String i:mantenimientoArmas.getDatos().getArmasHash().keySet()) {
-            cmbArma.getItems().add(i);
-            EA_comboBox.getItems().add(i);
-        }
-        EA_comboBox.getSelectionModel().select(0);
-        cmbArma.getSelectionModel().select(0);
 
+        for (String i:mantenimientoArmas.getDatos().getEstados()) {
+            EP_cmbSeleccionarAccion.getItems().add(i);
+            CG_cmbAccion.getItems().add(i);
 
-
-        for (IPrototype i:mantenimientoArmas.getPersonajes()) {
-            cmbHeroe.getItems().add(((Personaje) i).getNombre());
         }
 
-        cmbHeroe.getSelectionModel().select(0);
+        for (String i:mantenimientoArmas.getDatos().getPersonajes().keySet()) {
+            EP_cmbSeleccionarPersonaje.getItems().add(i);
+            CG_cmbHeroe.getItems().add(i);
 
-        cmbHeroeNivel.getSelectionModel().select(0);
-        cmbArma.getSelectionModel().select(0);
-        cmbArmaNivel.getSelectionModel().select(0);
-        cmbAccion.getSelectionModel().select(0);
-
+        }
 
 
-        strHeroe = (String)cmbHeroe.getValue();
-        strHeroeNivel = (String)cmbHeroeNivel.getValue();
-        strArma = (String)cmbArma.getValue();
-        strArmaNivel = (String)cmbArmaNivel.getValue();
-        strAccion = (String)cmbAccion.getValue();
+        for (String i:mantenimientoArmas.getDatos().getArmas().keySet()) {
+            EA_cmbSeleccionArma.getItems().add(i);
+            CG_cmbArma.getItems().add(i);
+        }
+        EA_cmbSeleccionArma.getSelectionModel().select(0);
+        EP_cmbSeleccionarPersonaje.getSelectionModel().select(0);
+        EP_cmbSeleccionarAccion.getSelectionModel().select(0);
+        CG_cmbHeroe.getSelectionModel().select(0);
+        CG_cmbAccion.getSelectionModel().select(0);
+        CG_cmbArma.getSelectionModel().select(0);
 
-        LoadSetImages();
+
+        Personaje p= (Personaje) mantenimientoArmas.getPersonajes().get(EP_cmbSeleccionarPersonaje.getValue());
+
+
+        for (int i = 1; i < p.getNivelMaximo()+1; i++) {
+            EP_cmbSeleccionarNivel.getItems().add(i);
+            CG_cmbNivel.getItems().add(i);
+        }
+
+        EP_cmbSeleccionarNivel.getSelectionModel().select(0);
+
+
+        EA_cmbSeleccionArma.setVisible(true);
+        EA_labelSeleccionarArma.setVisible(true);
+
 
     }
 
 
     //metodo para borrar las varas de las pantalla de editar arma
 
-    public void  borrarPantallaEditarArma(){
+    public void  actualizarComboBoxes( ){
+
+        for (String i: mantenimientoArmas.getDatos().getArmas().keySet()){
+            if (!EA_cmbSeleccionArma.getItems().contains(i)){
+                EA_cmbSeleccionArma.getItems().add(i);
+                CG_cmbArma.getItems().add(i);
+            }
+        }
+        for (String i: mantenimientoArmas.getDatos().getPersonajes().keySet()){
+            if (!EP_cmbSeleccionarPersonaje.getItems().contains(i)){
+                EP_cmbSeleccionarPersonaje.getItems().add(i);
+                CG_cmbHeroe.getItems().add(i);
+            }
+        }
+
+
+
 
 
     }
 
-
-
-    public void cargarCmbArmas() {
-
-    }
 
 
 }

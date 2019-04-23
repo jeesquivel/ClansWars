@@ -5,7 +5,7 @@
  */
 package Objetos;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -20,20 +20,19 @@ public class Arma implements IArma{
     protected long nivel;
     protected long nivelMaximo;
     protected long nivelAparicion;
-    protected String apariencia;
+    protected String  apariencia;
 
-    public Arma(String nombre, long alcance, long danno, long rango, long nivel, long nivelAparicion, String apariencia) {
+    public Arma(String nombre, long alcance, long danno, long rango, long nivel, long nivelMaximo, long nivelAparicion, String apariencia) {
         this.nombre = nombre;
         this.alcance = alcance;
         this.danno = danno;
         this.rango = rango;
         this.nivel = nivel;
-        this.nivelAparicion = nivelAparicion;
+        this.nivelAparicion= nivelAparicion;
+        this.nivelMaximo = nivelMaximo;
         this.apariencia = apariencia;
     }
 
-    public Arma() {
-    }
 
     public long getAlcance() {
         return alcance;
@@ -61,17 +60,17 @@ public class Arma implements IArma{
 
     @Override
     public Arma clonar() {
-       return new Arma(nombre, alcance, danno, rango, nivel, nivelAparicion, apariencia);
+       return new Arma(nombre, alcance, danno, rango, nivel, nivelMaximo,nivelAparicion, apariencia);
     }
 
     @Override
     public Arma deepclonar() {
-        return new Arma(nombre, alcance, danno, rango, nivel, nivelAparicion,  apariencia);
+        return new Arma(nombre, alcance, danno, rango, nivel, nivelMaximo,nivelAparicion, apariencia);
     }
 
     @Override
     public String toString() {
-        return "Arma {" + "nombre=" + nombre + ", alcance=" + alcance + ", danno=" + danno + ", rango=" + rango + ", nivel=" + nivel + ", nivelAparicion=" + nivelAparicion + ", apariencia=" + apariencia + '}';
+        return "Arma {" + "nombre=" + nombre + ", alcance=" + alcance + ", danno=" + danno + ", rango=" + rango + ", nivel=" + nivel  + ", apariencia=" + apariencia + '}';
     }
 
 
@@ -103,19 +102,13 @@ public class Arma implements IArma{
         this.nivel = nivel;
     }
 
-    public long getNivelAparicion() {
-        return nivelAparicion;
+
+
+    public String  getApariencia() {
+        return this.apariencia;
     }
 
-    public void setNivelAparicion(long nivelAparicion) {
-        this.nivelAparicion = nivelAparicion;
-    }
-
-    public String getApariencia() {
-        return apariencia;
-    }
-
-    public void setApariencia(String apariencia) {
+    public void setApariencia(String  apariencia) {
         this.apariencia = apariencia;
     }
 
@@ -128,7 +121,11 @@ public class Arma implements IArma{
         this.nivelMaximo = nivelMaximo;
     }
 
+    public long getNivelAparicion() {
+        return nivelAparicion;
+    }
 
-
-
+    public void setNivelAparicion(long nivelAparicion) {
+        this.nivelAparicion = nivelAparicion;
+    }
 }

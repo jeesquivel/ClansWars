@@ -11,4 +11,5 @@ public interface IBDArma {
     public void guardarArma(IArma arma);
     public void borrarArma(IArma arma);
     void cargarPersonajes();
+    void cargarEstados();
 }

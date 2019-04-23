@@ -22,10 +22,10 @@ public abstract class AbstractObjeto{
     protected ESTADO estado;                    // El estado actual del guerrero
     protected long nivelAparicion;               // Nivel del personaje a partir del cual se tendrá acceso al objeto
     protected long costo;                        // Costo en dinero del juego necesario para comprar el objeto
-    protected ArrayList<String> apariencia;     // Lista de direcciones donde estarán las imágenes de este objeto
+    protected String apariencia;     // Lista de direcciones donde estarán las imágenes de este objeto
     protected Point posicion;                   // Posición en la cuadrícula donde está este objeto.
 
-    public AbstractObjeto(String nombre, long vida, long nivel, long nivelMaximo, ESTADO estado, long nivelAparicion, long costo, ArrayList<String> apariencia, Point posicion) {
+    public AbstractObjeto(String nombre, long vida, long nivel, long nivelMaximo, ESTADO estado, long nivelAparicion, long costo,String apariencia, Point posicion) {
         this.nombre = nombre;
         this.vida = vida;
         this.nivel = nivel;
@@ -93,11 +93,11 @@ public abstract class AbstractObjeto{
         this.costo = costo;
     }
 
-    public ArrayList<String> getApariencia() {
+    public String  getApariencia() {
         return apariencia;
     }
 
-    public void setApariencia(ArrayList<String> apariencia) {
+    public void setApariencia(String apariencia) {
         this.apariencia = apariencia;
     }
 

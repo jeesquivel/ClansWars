@@ -1,58 +1,57 @@
 package BaseDatos;
 
 import Objetos.Arma;
-import Objetos.IArma;
 import Objetos.IPrototype;
-import com.sun.deploy.panel.IProperty;
+import Objetos.Personaje;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Data {
 
-    public ArrayList<Arma> armas = new ArrayList<>();
-    public ArrayList<IPrototype> personajes= new ArrayList<>();
-    public ArrayList<IPrototype> guerreros= new ArrayList<>();
-    public HashMap<String, Arma> armasHash = new HashMap<>();
-
-
-    public HashMap<String, Arma> getArmasHash() {
-        return armasHash;
-    }
-
-
+    public HashMap<String, IPrototype> personajes = new HashMap<>();
+    public HashMap<String, IPrototype> guerreros = new HashMap<>();
+    public HashMap<String, Arma> armas = new HashMap<>();
+    public ArrayList<String> estados = new ArrayList<>();
 
     public Data() {
-
     }
 
 
-    public ArrayList<Arma> getArmas() {
+
+
+    public ArrayList<String> getEstados(){
+        return this.estados;
+    }
+
+    public void setEstado(String estado){
+        estados.add(estado);
+    }
+
+    public HashMap<String, Arma> getArmas() {
         return armas;
     }
 
     public void addArma(Arma arma) {
-        this.armas.add(arma);
-        this.armasHash.put(arma.getNombre(),arma);
+        this.armas.put(arma.getNombre(), arma);
     }
 
-    public ArrayList<IPrototype> getPersonajes() {
+    public HashMap<String, IPrototype> getPersonajes() {
         return personajes;
     }
 
-    public void addPersonaje(IPrototype personaje) {
-        this.personajes.add(personaje);
+    public void addPersonaje(Personaje personaje) {
+
+        this.personajes.put(personaje.getNombre(), personaje);
     }
 
-    public ArrayList<IPrototype> getGuerreros() {
+    public HashMap<String, IPrototype> getGuerreros() {
         return guerreros;
     }
 
-    public void addGuerrero(IPrototype guerrero) {
-        this.guerreros.add(guerrero);
+    public void addGuerrero(Personaje guerrero) {
+
+        this.guerreros.put(guerrero.getNombre(), guerrero);
     }
 
-    public void setArmas(ArrayList<Arma> armas) {
-        this.armas = armas;
-    }
 }

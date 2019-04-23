@@ -1,44 +1,47 @@
 {
-  "armeria":[
+  "estados":["Caminando","Atacando","Detenido", "Muerto"],
+  "armeria": [
     {
-      "name":"Arco",
-      "alcance": 931,
+      "nombre": "Arco",
+      "nivel": 1,
+      "nivelMaximo": 5,
+      "nivelAparicion": 2,
       "danno": 1,
-      "rango": 1,
-      "nivel": 2,
-      "nivelAparicion": 1,
-      "apariencia": "url"
+      "rango": 2,
+      "alcance": 2,
+      "apariencia": "/images/Armas/Arco/"
     },
     {
-      "name": "Espada",
-      "alcance": 310,
+      "nombre": "Espada",
+      "nivel": 1,
+      "nivelMaximo": 5,
+      "nivelAparicion": 2,
       "danno": 1,
-      "rango": 1,
-      "nivel": 4,
-      "nivelAparicion": 1,
-      "apariencia": "url"
+      "rango": 2,
+      "alcance": 2,
+      "apariencia":"/images/Armas/Espada/"
     },
     {
-      "name": "Manos",
-      "alcance": 3,
+      "nombre": "Manos",
+      "nivel": 1,
+      "nivelMaximo": 5,
+      "nivelAparicion": 2,
       "danno": 1,
-      "rango": 1,
-      "nivel": 5,
-      "nivelAparicion": 1,
-      "apariencia": "url"
+      "rango": 2,
+      "alcance": 2,
+      "apariencia": "/images/Armas/Manos/"
     },
     {
-      "name": "Mazo",
-      "alcance": 1,
+      "nombre": "Mazo",
+      "nivel": 1,
+      "nivelMaximo": 5,
+      "nivelAparicion": 2,
       "danno": 1,
-      "rango": 10,
-      "nivel": 2,
-      "nivelAparicion": 1,
-      "apariencia": "url"
-    }
-  ],
-
-  "Personajes":[
+      "rango": 2,
+      "alcance": 2,
+      "apariencia": "/images/Armas/Mazo/"
+    }],
+  "Personajes": [
     {
       "nombre": "Arquera",
       "vida": 100,
@@ -46,12 +49,7 @@
       "nivelMaximo": 5,
       "nivelAparicion": 2,
       "costo": 1000,
-      "apariencia": [{
-        "caminando": "url",
-        "atacando": "url",
-        "detenido": "url",
-        "muerto": "url"
-      }],
+      "apariencia": "/images/Heroes/Arquera/",
       "x": 0,
       "y": 0,
       "velocidad": 1,
@@ -65,12 +63,7 @@
       "nivelMaximo": 5,
       "nivelAparicion": 2,
       "costo": 1000,
-      "apariencia": [{
-        "caminando": "url",
-        "atacando": "url",
-        "detenido": "url",
-        "muerto": "url"
-      }],
+      "apariencia": "/images/Heroes/Barbaro/",
       "x": 0,
       "y": 0,
       "velocidad": 1,
@@ -84,12 +77,7 @@
       "nivelMaximo": 5,
       "nivelAparicion": 2,
       "costo": 1000,
-      "apariencia": [{
-        "caminando": "url",
-        "atacando": "url",
-        "detenido": "url",
-        "muerto": "url"
-      }],
+      "apariencia": "/images/Heroes/Enfermera/",
       "x": 0,
       "y": 0,
       "velocidad": 1,
@@ -103,12 +91,7 @@
       "nivelMaximo": 5,
       "nivelAparicion": 2,
       "costo": 1000,
-      "apariencia": [{
-        "caminando": "url",
-        "atacando": "url",
-        "detenido": "url",
-        "muerto": "url"
-      }],
+      "apariencia": "/images/Heroes/Mago/",
       "x": 0,
       "y": 0,
       "velocidad": 1,
@@ -122,12 +105,7 @@
       "nivelMaximo": 5,
       "nivelAparicion": 2,
       "costo": 1000,
-      "apariencia": [{
-        "caminando": "url",
-        "atacando": "url",
-        "detenido": "url",
-        "muerto": "url"
-      }],
+      "apariencia": "/images/Heroes/Soldado/",
       "x": 0,
       "y": 0,
       "velocidad": 1,
