@@ -12,4 +12,6 @@ public interface IBDArma {
     public void borrarArma(IArma arma);
     void cargarPersonajes();
     void cargarEstados();
+    void cargarTiposGenerales();
+    void cargarTiposArmas();
 }

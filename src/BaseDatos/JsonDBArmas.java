@@ -41,6 +41,8 @@ public class JsonDBArmas implements IBDArma {
         cargarArmas();
         cargarPersonajes();
         cargarEstados();
+        cargarTiposGenerales();
+        cargarTiposArmas();
     }
 
 
@@ -67,6 +69,7 @@ public class JsonDBArmas implements IBDArma {
         long  alcance;
         long rango;
         String  apariencia ;
+        String puedeUsar;
 
 
         ArrayList atributos =  (ArrayList) jsonArmas.get("armeria");
@@ -81,13 +84,13 @@ public class JsonDBArmas implements IBDArma {
             alcance= (long) armaAux.get("danno");
             rango= (long) armaAux.get("rango");
             apariencia= (String) armaAux.get("apariencia");
+            puedeUsar= (String) armaAux.get("puedeUsar");
 
                 // arreglar esta mierda y poner un patron de disenno
 
-            Arma arma  = new Arma(nombre, alcance, danno, rango, nivel,nivelMaximo, nivelAparicion,apariencia);
+            Arma arma  = new Arma(nombre, alcance, danno, rango, nivel,nivelMaximo, nivelAparicion,apariencia,puedeUsar);
             datos.addArma(arma); // agrega un armaal arreglo de armas
         }
-        datos.getArmas().remove("null");
     }
 
     @Override
@@ -132,7 +135,20 @@ public class JsonDBArmas implements IBDArma {
         for (String i: estados) {
             datos.setEstado(i);
         }
+    }
 
+    @Override
+    public void cargarTiposGenerales() {
+        ArrayList<String> tipos = (ArrayList<String>) jsonArmas.get("TiposGenerales");
+        datos.setTiposGenerales(tipos);
+
+
+    }
+
+    @Override
+    public void cargarTiposArmas() {
+        ArrayList<String> tipos = (ArrayList<String>) jsonArmas.get("TiposArmas");
+        datos.setTiposArmas(tipos);
 
     }
 

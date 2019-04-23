@@ -7,6 +7,7 @@ package clanswars;
 
 import Constructores.ArmasFactory;
 import Constructores.MantenimientoArmas;
+import Constructores.PersonajeFactory;
 import Objetos.*;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -42,7 +43,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private ImageView imgArma1;
     @FXML
-    private ComboBox cmbHeroe;
+    private ComboBox EA_cmbSeleccionTipo;
 
     private String strHeroe, strArma, strHeroeNivel, strArmaNivel, strAccion;
     private Image imgHeroe;
@@ -75,6 +76,12 @@ public class FXMLDocumentController implements Initializable {
     private ImageView EA_ImageViewArma;
     @FXML
     private Label EA_labelSeleccionarArma;
+    @FXML
+    private Label EA_labelQuienUsaArma;
+    @FXML
+    private TextField EA_edtPuedeUsar;
+
+
 
 
     // tercer tab
@@ -145,6 +152,7 @@ public class FXMLDocumentController implements Initializable {
         EA_edtNivelMaximo.setText(String.valueOf(arma.getNivelMaximo()));
         EA_edtNivelAparicion.setText(String.valueOf(arma.getNivelAparicion()));
         EA_edtApariencia.setText(String.valueOf(arma.getApariencia()));
+        EA_edtPuedeUsar.setText(arma.getPuedeUsar());
         Image imagen =  new Image(arma.getApariencia()+"Atacando"+arma.getNivel() +".gif");
         EA_ImageViewArma.setImage(imagen);
     }
@@ -172,6 +180,8 @@ public class FXMLDocumentController implements Initializable {
         EA_labelSeleccionarArma.setVisible(false);
         EA_cmbSeleccionArma.setVisible(false);
         EA_ImageViewArma.setImage(null);
+        EA_cmbSeleccionTipo.setVisible(true);
+        EA_labelQuienUsaArma.setVisible(true);
         limpiarPantallaEA();
     }
 
@@ -187,13 +197,14 @@ public class FXMLDocumentController implements Initializable {
             long nivelAparicion= Long.parseLong(EA_edtNivelAparicion.getText());
             long nivelMaximo= Long.parseLong(EA_edtNivelMaximo.getText());
             String apariencia= EA_edtApariencia.getText();
+            String puedeUsar= EA_edtPuedeUsar.getText();
 
 
             //agregar un patron de disenno creaconal
 
 
             ArmasFactory armasFactory= new ArmasFactory();
-            IArma arma= armasFactory.crearArma("ATAQUE",nombre,alcance,danno,rango,nivel,nivelMaximo,nivelAparicion,apariencia);
+            IArma arma= armasFactory.crearArma("ATAQUE",nombre,alcance,danno,rango,nivel,nivelMaximo,nivelAparicion,apariencia,puedeUsar);
 
 
             mantenimientoArmas.editarArma((Arma) arma);
@@ -204,8 +215,32 @@ public class FXMLDocumentController implements Initializable {
             EA_cmbSeleccionArma.setVisible(true);
             EA_labelSeleccionarArma.setVisible(true);
 
+            EA_cmbSeleccionTipo.setVisible(false);
+            EA_labelQuienUsaArma.setVisible(false);
+
 
     }
+
+
+    @FXML
+    private void handleComboBoxTipo(ActionEvent event){
+        EA_edtPuedeUsar.setText((String) EA_cmbSeleccionArma.getValue());
+    }
+
+
+    @FXML
+    private void handleCancelar(ActionEvent event){
+        actualizarComboBoxes();
+
+        EA_cmbSeleccionArma.setVisible(true);
+        EA_labelSeleccionarArma.setVisible(true);
+
+        EA_cmbSeleccionTipo.setVisible(false);
+        EA_labelQuienUsaArma.setVisible(false);
+        limpiarPantallaEA();
+    }
+
+
 
 
     private void limpiarPantallaEA(){
@@ -217,6 +252,8 @@ public class FXMLDocumentController implements Initializable {
         EA_edtRango.clear();
         EA_edtNivelAparicion.clear();
         EA_edtNivelMaximo.clear();
+        EA_ImageViewArma.setImage(null);
+        EA_edtPuedeUsar.clear();
     }
 
 
@@ -259,13 +296,14 @@ public class FXMLDocumentController implements Initializable {
         long nivelMaximo= Long.parseLong(EP_edtNivelMaximo.getText());
 
 
+        PersonajeFactory personajeFactory = new PersonajeFactory();
 
-        Personaje p= new Personaje(nombre,vida,nivel,nivelMaximo, AbstractObjeto.ESTADO.ESPERANDO,
+
+        Personaje personaje = personajeFactory.crearPersonaje("BARBARO",nombre,vida,nivel,nivelMaximo, AbstractObjeto.ESTADO.ESPERANDO,
                 nivelAparicion,costo,apariencia,golpes,campos,velocidad);
-        mantenimientoArmas.getPersonajes().put(nombre,p);
+
+        mantenimientoArmas.getPersonajes().put(nombre,personaje);
         actualizarComboBoxes();
-
-
 
         EP_labelSeleccionarAccion.setVisible(true);
         EP_labelSeleccionarPersonaje.setVisible(true);
@@ -435,6 +473,19 @@ public class FXMLDocumentController implements Initializable {
             EA_cmbSeleccionArma.getItems().add(i);
             CG_cmbArma.getItems().add(i);
         }
+
+        for (String i: mantenimientoArmas.getDatos().getTiposGenerales()
+             ) {
+            EA_cmbSeleccionTipo.getItems().add(i);
+
+        }
+
+        EA_cmbSeleccionTipo.getSelectionModel().select(0);
+        EA_cmbSeleccionTipo.setVisible(false);
+        EA_labelQuienUsaArma.setVisible(false);
+
+
+
         EA_cmbSeleccionArma.getSelectionModel().select(0);
         EP_cmbSeleccionarPersonaje.getSelectionModel().select(0);
         EP_cmbSeleccionarAccion.getSelectionModel().select(0);

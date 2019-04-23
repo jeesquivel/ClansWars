@@ -14,6 +14,9 @@ import java.util.HashMap;
  */
 public  class Arma implements IArma{
     protected String nombre;
+
+
+    protected String tipo;
     protected long alcance;
     protected long danno;
     protected long rango;
@@ -22,8 +25,13 @@ public  class Arma implements IArma{
     protected long nivelAparicion;
     protected String  apariencia;
 
-    public Arma(String nombre, long alcance, long danno, long rango, long nivel, long nivelMaximo, long nivelAparicion, String apariencia) {
+
+
+    protected  String puedeUsar;
+
+    public Arma(String nombre,String tipo, long alcance, long danno, long rango, long nivel, long nivelMaximo, long nivelAparicion, String apariencia, String puedeUsar) {
         this.nombre = nombre;
+        this.tipo=tipo;
         this.alcance = alcance;
         this.danno = danno;
         this.rango = rango;
@@ -31,6 +39,7 @@ public  class Arma implements IArma{
         this.nivelAparicion= nivelAparicion;
         this.nivelMaximo = nivelMaximo;
         this.apariencia = apariencia;
+        this.puedeUsar=puedeUsar;
     }
 
 
@@ -60,12 +69,12 @@ public  class Arma implements IArma{
 
     @Override
     public Arma clonar() {
-       return new Arma(nombre, alcance, danno, rango, nivel, nivelMaximo,nivelAparicion, apariencia);
+       return new Arma(nombre,tipo, alcance, danno, rango, nivel, nivelMaximo,nivelAparicion, apariencia,puedeUsar);
     }
 
     @Override
     public Arma deepclonar() {
-        return new Arma(nombre, alcance, danno, rango, nivel, nivelMaximo,nivelAparicion, apariencia);
+        return new Arma(nombre,tipo, alcance, danno, rango, nivel, nivelMaximo,nivelAparicion, apariencia,puedeUsar);
     }
 
     @Override
@@ -128,4 +137,23 @@ public  class Arma implements IArma{
     public void setNivelAparicion(long nivelAparicion) {
         this.nivelAparicion = nivelAparicion;
     }
+
+    public String getPuedeUsar() {
+        return puedeUsar;
+    }
+
+    public void setPuedeUsar(String puedeUsar) {
+        this.puedeUsar = puedeUsar;
+    }
+
+
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
 }

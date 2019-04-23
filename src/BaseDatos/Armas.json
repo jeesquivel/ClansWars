@@ -1,5 +1,7 @@
 {
-  "tipoPersonajes":["MAGO","BARBARO","ARQUERA","SOLDADO","ENFERMERA"],
+
+  "TiposGenerales": ["TERRESTRE"],
+  "TiposArmas": ["HECHIZO","ATAQUE"],
   "estados":["Caminando","Atacando","Detenido", "Muerto"],
   "armeria": [
     {
@@ -10,7 +12,8 @@
       "danno": 1,
       "rango": 2,
       "alcance": 2,
-      "apariencia": "/images/Armas/Arco/"
+      "apariencia": "/images/Armas/Arco/",
+      "puedeUsar": "TERRESTRE"
     },
     {
       "nombre": "Espada",
@@ -20,7 +23,8 @@
       "danno": 1,
       "rango": 2,
       "alcance": 2,
-      "apariencia":"/images/Armas/Espada/"
+      "apariencia":"/images/Armas/Espada/",
+      "puedeUsar": "TERRESTRE"
     },
     {
       "nombre": "Manos",
@@ -30,7 +34,8 @@
       "danno": 1,
       "rango": 2,
       "alcance": 2,
-      "apariencia": "/images/Armas/Manos/"
+      "apariencia": "/images/Armas/Manos/",
+      "puedeUsar": "TERRESTRE"
     },
     {
       "nombre": "Mazo",
@@ -40,7 +45,8 @@
       "danno": 1,
       "rango": 2,
       "alcance": 2,
-      "apariencia": "/images/Armas/Mazo/"
+      "apariencia": "/images/Armas/Mazo/",
+      "puedeUsar": "TERRESTRE"
     }],
   "Personajes": [
     {

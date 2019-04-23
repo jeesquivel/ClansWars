@@ -39,7 +39,7 @@
                <children>
                   <Label fx:id="EA_labelSeleccionarArma" layoutX="26.0" layoutY="73.0" text="Seleccionar arma:" />
                   <ComboBox fx:id="EA_cmbSeleccionArma" layoutX="190.0" layoutY="68.0" onAction="#handleEA_comboBox" prefHeight="26.0" prefWidth="221.0" />
-                  <ImageView fx:id="EA_ImageViewArma" fitHeight="150.0" fitWidth="150.0" layoutX="424.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="EA_ImageViewArma" fitHeight="150.0" fitWidth="150.0" layoutX="487.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
                   <GridPane layoutX="26.0" layoutY="167.0" prefHeight="290.0" prefWidth="540.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="265.0" minWidth="10.0" prefWidth="107.0" />
@@ -54,6 +54,7 @@
                       <RowConstraints maxHeight="1.7976931348623157E308" valignment="CENTER" vgrow="ALWAYS" />
                         <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
                         <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
                         <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="0.0" valignment="CENTER" vgrow="ALWAYS" />
                     </rowConstraints>
                      <children>
@@ -63,24 +64,29 @@
                         <Label text="Rango:" GridPane.rowIndex="3" />
                         <Label text="Nivel del arma:" GridPane.rowIndex="4" />
                         <Label prefHeight="23.0" prefWidth="126.0" text="Nivel maximo:" GridPane.rowIndex="5" />
-                        <Label text="Apariencia:" GridPane.rowIndex="7" />
+                        <Label text="Apariencia:" GridPane.rowIndex="8" />
                         <TextField fx:id="EA_edtNombre" GridPane.columnIndex="1" />
                         <TextField fx:id="EA_edtAlcance" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="EA_edtDanno" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="EA_edtRango" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <TextField fx:id="EA_edtNivel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <TextField fx:id="EA_edtNivelMaximo" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="7" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="8" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                            <children>
                               <TextField fx:id="EA_edtApariencia" nodeOrientation="LEFT_TO_RIGHT" prefHeight="26.0" prefWidth="306.0" HBox.hgrow="SOMETIMES" />
                               <Button mnemonicParsing="false" onAction="#handleBuscarUrl" prefHeight="26.0" prefWidth="114.0" text="URL carpeta" textFill="#498d05" />
                            </children></HBox>
                         <Label text="Nivel de aparicion:" GridPane.rowIndex="6" />
                         <TextField fx:id="EA_edtNivelAparicion" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label text="Quien puede usar el arma" GridPane.rowIndex="7" />
+                        <TextField fx:id="EA_edtPuedeUsar" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                      </children>
                   </GridPane>
                   <Button fx:id="EA_btnGuardar" layoutX="585.0" layoutY="457.0" mnemonicParsing="false" onAction="#handleGuardarArma" text="Guardar" />
                   <Button fx:id="EA_btnCrearArma" layoutX="26.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleCrearNuevaArma" text="Crear nueva arma" />
+                  <Label fx:id="EA_labelQuienUsaArma" layoutX="26.0" layoutY="118.0" text="Quien puede usar el arma:" />
+                  <ComboBox fx:id="EA_cmbSeleccionTipo" layoutX="215.0" layoutY="113.0" onAction="#handleComboBoxTipo" prefHeight="26.0" prefWidth="195.0" />
+                  <Button fx:id="EA_btnCancelar" layoutX="476.0" layoutY="457.0" mnemonicParsing="false" onAction="#handleCancelar" text="Cancelar" />
                </children></AnchorPane>
       </content>
     </Tab>
