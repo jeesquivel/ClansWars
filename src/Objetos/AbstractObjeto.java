@@ -25,7 +25,7 @@ public abstract class AbstractObjeto{
     protected String apariencia;     // Lista de direcciones donde estarán las imágenes de este objeto
     protected Point posicion;                   // Posición en la cuadrícula donde está este objeto.
 
-    public AbstractObjeto(String nombre, long vida, long nivel, long nivelMaximo, ESTADO estado, long nivelAparicion, long costo,String apariencia, Point posicion) {
+    public AbstractObjeto(String nombre, long vida, long nivel, long nivelMaximo, ESTADO estado, long nivelAparicion, long costo,String apariencia) {
         this.nombre = nombre;
         this.vida = vida;
         this.nivel = nivel;
@@ -34,7 +34,7 @@ public abstract class AbstractObjeto{
         this.nivelAparicion = nivelAparicion;
         this.costo = costo;
         this.apariencia = apariencia;
-        this.posicion = posicion;
+        this.posicion = new Point(0,0);
     }
     
     public String getNombre() {

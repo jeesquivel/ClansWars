@@ -4,6 +4,7 @@ package BaseDatos;
  * @author jeesquivel
  */
 
+
 import Objetos.AbstractObjeto;
 import Objetos.Arma;
 import Objetos.IArma;
@@ -119,7 +120,7 @@ public class JsonDBArmas implements IBDArma {
             campos =(long) mapa.get("campos");
             golpesXsegundo=(long) mapa.get("golpesXsegundo");
 
-            Personaje personaje = new Personaje(nombre,vida,nivel,nivelMaximo, AbstractObjeto.ESTADO.ESPERANDO, nivelAparicion,  costo, apariencia, punto,  golpesXsegundo,  campos,  velocidad);
+            Personaje personaje = new Personaje(nombre,vida,nivel,nivelMaximo, AbstractObjeto.ESTADO.ESPERANDO, nivelAparicion,  costo, apariencia,  golpesXsegundo,  campos,  velocidad);
             datos.addPersonaje(personaje);
         }
     }

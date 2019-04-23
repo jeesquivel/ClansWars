@@ -13,8 +13,9 @@ import java.util.ArrayList;
  * @author alexander
  */
 public class Personaje extends AbstractObjeto implements IMovible, IPrototype<Personaje>{
+
     public enum TIPO {TERRESTRE, AEREO}
-    
+
     protected long golpesSegundo;         // Cantidad de veces que el guerrero ataca por segundo
     protected long campos;                   // Campos que necesita el guerrero
     protected long velocidad;                // Velocidad en que se mueve el guerrero
@@ -25,12 +26,13 @@ public class Personaje extends AbstractObjeto implements IMovible, IPrototype<Pe
     
     private ArrayList<AbstractObjeto> enemigos;
 
-    public Personaje(String nombre, long vida, long nivel, long nivelMaximo, ESTADO estado, long nivelAparicion, long costo, String apariencia, Point posicion, long golpesSegundo, long campos, long velocidad) {
-        super(nombre, vida, nivel, nivelMaximo, estado, nivelAparicion, costo, apariencia, posicion);
+    public Personaje(String nombre, long vida, long nivel, long nivelMaximo, ESTADO estado, long nivelAparicion, long costo, String apariencia, long golpesSegundo, long campos, long velocidad) {
+        super(nombre, vida, nivel, nivelMaximo, estado, nivelAparicion, costo, apariencia);
         this.golpesSegundo = golpesSegundo;
         this.campos        = campos;
         this.velocidad     = velocidad;
         this.objetivo      = null;
+
     }
     
     public void atacado(int danno){
@@ -102,12 +104,12 @@ public class Personaje extends AbstractObjeto implements IMovible, IPrototype<Pe
     
     @Override
     public Personaje clonar() throws CloneNotSupportedException {
-       return new Personaje(nombre, vida, nivel, nivelMaximo, estado, nivelAparicion, costo, apariencia, posicion, golpesSegundo, campos, velocidad);
+       return new Personaje(nombre, vida, nivel, nivelMaximo, estado, nivelAparicion, costo, apariencia, golpesSegundo, campos, velocidad);
     }
 
     @Override
     public Personaje deepclonar() throws CloneNotSupportedException {
-        return new Personaje(nombre, vida, nivel, nivelMaximo, estado, nivelAparicion, costo, apariencia, (Point)posicion.clone(),  golpesSegundo, campos, velocidad);
+        return new Personaje(nombre, vida, nivel, nivelMaximo, estado, nivelAparicion, costo, apariencia,  golpesSegundo, campos, velocidad);
     }
     
 }

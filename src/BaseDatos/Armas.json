@@ -1,4 +1,5 @@
 {
+  "tipoPersonajes":["MAGO","BARBARO","ARQUERA","SOLDADO","ENFERMERA"],
   "estados":["Caminando","Atacando","Detenido", "Muerto"],
   "armeria": [
     {

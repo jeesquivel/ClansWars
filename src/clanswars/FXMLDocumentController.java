@@ -5,6 +5,7 @@
  */
 package clanswars;
 
+import Constructores.ArmasFactory;
 import Constructores.MantenimientoArmas;
 import Objetos.*;
 import javafx.beans.value.ObservableValue;
@@ -189,9 +190,14 @@ public class FXMLDocumentController implements Initializable {
 
 
             //agregar un patron de disenno creaconal
-            Arma arma= new Arma(nombre,alcance,danno,rango,nivel,nivelMaximo,nivelAparicion,apariencia);
 
-            mantenimientoArmas.editarArma(arma);
+
+            ArmasFactory armasFactory= new ArmasFactory();
+            IArma arma= armasFactory.crearArma("ATAQUE",nombre,alcance,danno,rango,nivel,nivelMaximo,nivelAparicion,apariencia);
+
+
+            mantenimientoArmas.editarArma((Arma) arma);
+
             actualizarComboBoxes();
 
 
@@ -254,9 +260,8 @@ public class FXMLDocumentController implements Initializable {
 
 
 
-        Point punto = new Point(0,0);
         Personaje p= new Personaje(nombre,vida,nivel,nivelMaximo, AbstractObjeto.ESTADO.ESPERANDO,
-                nivelAparicion,costo,apariencia,punto,golpes,campos,velocidad);
+                nivelAparicion,costo,apariencia,golpes,campos,velocidad);
         mantenimientoArmas.getPersonajes().put(nombre,p);
         actualizarComboBoxes();
 

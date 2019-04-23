@@ -12,7 +12,7 @@ import java.util.HashMap;
  * @author alexander
  * @author jeesquivel
  */
-public class Arma implements IArma{
+public  class Arma implements IArma{
     protected String nombre;
     protected long alcance;
     protected long danno;
