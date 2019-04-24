@@ -13,6 +13,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -21,7 +22,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 
-import java.awt.*;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -36,16 +36,14 @@ public class FXMLDocumentController implements Initializable {
 
 
 
+
     @FXML
     private AnchorPane tabPane;
-    @FXML
-    private ImageView imgHeroe1;
-    @FXML
-    private ImageView imgArma1;
+
     @FXML
     private ComboBox EA_cmbSeleccionTipo;
 
-    private String strHeroe, strArma, strHeroeNivel, strArmaNivel, strAccion;
+    private String strHeroe, strArma;
     private Image imgHeroe;
     private Image imgArma;
     private boolean boolImgHeroe;
@@ -56,6 +54,10 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private ComboBox EA_cmbSeleccionArma;
+    @FXML
+    private ComboBox EA_cmbTipoArma;
+    @FXML
+    private ComboBox EA_cmbNivelArma;
     @FXML
     private TextField EA_edtNombre;
     @FXML
@@ -79,6 +81,10 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label EA_labelQuienUsaArma;
     @FXML
+    private Label EA_labelTipoArma;
+    @FXML
+    private Label EA_labelNivelArma;
+    @FXML
     private TextField EA_edtPuedeUsar;
     @FXML
     private TextField EA_edtTipo;
@@ -95,9 +101,13 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label EP_labelSeleccionarNivel;
     @FXML
+    private Label EP_labelTipoPersonaje;
+    @FXML
     private ImageView EP_ImageView;
     @FXML
     private TextField EP_edtNombre;
+    @FXML
+    private TextField EP_edtTipo;
     @FXML
     private TextField EP_edtVida;
     @FXML
@@ -122,6 +132,8 @@ public class FXMLDocumentController implements Initializable {
     private ComboBox EP_cmbSeleccionarAccion;
     @FXML
     private ComboBox EP_cmbSeleccionarNivel;
+    @FXML
+    private ComboBox EP_cmbTipoPersonaje;
 
     // CUARTO TAB
     @FXML
@@ -144,6 +156,8 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleEA_comboBox(ActionEvent event){
+        try{
+
         strArma= (String) EA_cmbSeleccionArma.getValue();
         Arma arma= mantenimientoArmas.getDatos().getArmas().get(strArma);
         EA_edtNombre.setText(arma.getNombre());
@@ -155,11 +169,41 @@ public class FXMLDocumentController implements Initializable {
         EA_edtNivelMaximo.setText(String.valueOf(arma.getNivelMaximo()));
         EA_edtNivelAparicion.setText(String.valueOf(arma.getNivelAparicion()));
         EA_edtApariencia.setText(String.valueOf(arma.getApariencia()));
-        EA_edtPuedeUsar.setText(arma.getPuedeUsar());
 
-        Image imagen =  new Image(arma.getApariencia()+"Atacando"+arma.getNivel() +".gif");
+        EA_edtPuedeUsar.setText(arma.getPuedeUsar());
+        EA_cmbNivelArma.getItems().removeAll();
+        for (int i = (int) arma.getNivel(); i <arma.getNivelMaximo()+1 ; i++) {
+            if (!EA_cmbNivelArma.getItems().contains(i)){
+            EA_cmbNivelArma.getItems().add(i);}
+        }
+        EA_cmbNivelArma.getSelectionModel().select(0);
+
+        Image imagen =  new Image(arma.getApariencia()+"Atacando"+1+".gif");
         EA_ImageViewArma.setImage(imagen);
+
+        }catch (Exception e){
+            mensajeErrorConsulta();
+            limpiarPantallaEA();
+
+        }
     }
+
+
+    @FXML
+    private void handleComboBoxNivelArma(ActionEvent event){
+        try{
+            String nivel = (String) EA_cmbNivelArma.getValue().toString();
+            Arma arma= mantenimientoArmas.getDatos().getArmas().get(strArma);
+            Image imagen =  new Image(arma.getApariencia()+"Atacando"+nivel+".gif");
+            EA_ImageViewArma.setImage(imagen);
+        }catch (Exception e){
+
+        }
+
+    }
+
+
+
 
 /*
         METODOS DEL SEGUNDP TAB
@@ -183,33 +227,39 @@ public class FXMLDocumentController implements Initializable {
     private void handleCrearNuevaArma(ActionEvent event){
         EA_labelSeleccionarArma.setVisible(false);
         EA_cmbSeleccionArma.setVisible(false);
+        EA_cmbNivelArma.setVisible(false);
+        EA_labelNivelArma.setVisible(false);
         EA_ImageViewArma.setImage(null);
         EA_cmbSeleccionTipo.setVisible(true);
         EA_labelQuienUsaArma.setVisible(true);
+        EA_labelTipoArma.setVisible(true);
+        EA_cmbTipoArma.setVisible(true);
         limpiarPantallaEA();
     }
 
 
     @FXML
     private void handleGuardarArma(ActionEvent event){
-
-            String nombre= EA_edtNombre.getText();
-            long alcance= Long.parseLong(EA_edtAlcance.getText());
-            long danno= Long.parseLong(EA_edtDanno.getText());
-            long rango= Long.parseLong(EA_edtRango.getText());
-            long nivel= Long.parseLong(EA_edtNivel.getText());
-            long nivelAparicion= Long.parseLong(EA_edtNivelAparicion.getText());
-            long nivelMaximo= Long.parseLong(EA_edtNivelMaximo.getText());
-            String apariencia= EA_edtApariencia.getText();
-            String puedeUsar= EA_edtPuedeUsar.getText();
-            String tipo=EA_edtTipo.getText();
+        try {
 
 
-            //agregar un patron de disenno creaconal
+            String nombre = EA_edtNombre.getText();
+            long alcance = Long.parseLong(EA_edtAlcance.getText());
+            long danno = Long.parseLong(EA_edtDanno.getText());
+            long rango = Long.parseLong(EA_edtRango.getText());
+            long nivel = Long.parseLong(EA_edtNivel.getText());
+            long nivelAparicion = Long.parseLong(EA_edtNivelAparicion.getText());
+            long nivelMaximo = Long.parseLong(EA_edtNivelMaximo.getText());
+            String apariencia = EA_edtApariencia.getText();
+            String puedeUsar = EA_edtPuedeUsar.getText();
+            String tipo = EA_edtTipo.getText();
 
 
-            ArmasFactory armasFactory= new ArmasFactory();
-            IArma arma= armasFactory.crearArma(nombre,tipo,alcance,danno,rango,nivel,nivelMaximo,nivelAparicion,apariencia,puedeUsar);
+            //agregar un patron de disenno creacional
+            // se agrego el factory
+
+            ArmasFactory armasFactory = new ArmasFactory();
+            IArma arma = armasFactory.crearArma(nombre, tipo, alcance, danno, rango, nivel, nivelMaximo, nivelAparicion, apariencia, puedeUsar);
 
 
             mantenimientoArmas.editarArma((Arma) arma);
@@ -219,9 +269,24 @@ public class FXMLDocumentController implements Initializable {
 
             EA_cmbSeleccionArma.setVisible(true);
             EA_labelSeleccionarArma.setVisible(true);
+            EA_cmbNivelArma.setVisible(true);
+            EA_labelNivelArma.setVisible(true);
 
             EA_cmbSeleccionTipo.setVisible(false);
             EA_labelQuienUsaArma.setVisible(false);
+            EA_labelTipoArma.setVisible(false);
+            EA_cmbTipoArma.setVisible(false);
+
+            limpiarPantallaEA();
+
+            mensajeExito("Arma");
+
+
+
+        }catch (Exception e){
+                mensajeError();
+        }
+
 
 
     }
@@ -229,8 +294,16 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleComboBoxTipo(ActionEvent event){
-        EA_edtPuedeUsar.setText((String) EA_cmbSeleccionArma.getValue());
+        EA_edtPuedeUsar.setText((String) EA_cmbSeleccionTipo.getValue());
     }
+
+    @FXML
+    private void handleComboBoxTipoArma(ActionEvent event){
+        EA_edtTipo.setText((String) EA_cmbTipoArma.getValue());
+    }
+
+
+
 
 
     @FXML
@@ -239,11 +312,30 @@ public class FXMLDocumentController implements Initializable {
 
         EA_cmbSeleccionArma.setVisible(true);
         EA_labelSeleccionarArma.setVisible(true);
+        EA_cmbNivelArma.setVisible(true);
+        EA_labelNivelArma.setVisible(true);
 
+        EA_labelTipoArma.setVisible(false);
+        EA_cmbTipoArma.setVisible(false);
         EA_cmbSeleccionTipo.setVisible(false);
         EA_labelQuienUsaArma.setVisible(false);
         limpiarPantallaEA();
     }
+
+
+    @FXML
+    private void handleBorrarArma(ActionEvent event){
+        try{
+            mantenimientoArmas.borrarArma(EA_edtNombre.getText());
+            limpiarPantallaEA();
+            actualizarComboBoxes();
+            mensajeBorrado("Arma");
+
+        }catch (Exception e){
+            mensajeError();
+        }
+    }
+
 
 
 
@@ -271,52 +363,71 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void handleEP_comboBox(ActionEvent event){
-        strHeroe= (String) EP_cmbSeleccionarPersonaje.getValue();
-        Personaje personaje= (Personaje) mantenimientoArmas.getDatos().getPersonajes().get(strHeroe);
-        EP_edtNombre.setText(personaje.getNombre());
-        EP_edtVelocidad.setText(String.valueOf(personaje.getVelocidad()));
-        EP_edtVida.setText(String.valueOf(personaje.getVida()));
-        EP_edtNivel.setText(String.valueOf(personaje.getNivel()));
-        EP_edtNivelAparicion.setText(String.valueOf(personaje.getNivelAparicion()));
-        EP_edtCosto.setText(String.valueOf(personaje.getCosto()));
-        EP_edtApariencia.setText(personaje.getApariencia());
-        EP_edtCampos.setText(String.valueOf(personaje.getCampos()));
-        EP_edtGolpes.setText(String.valueOf(personaje.getGolpesSegundo()));
-        EP_edtNivelMaximo.setText(String.valueOf(personaje.getNivelMaximo()));
-        Image imagen =  new Image(personaje.getApariencia()+EP_cmbSeleccionarAccion.getValue()+EP_cmbSeleccionarNivel.getValue()+".gif");
-        EP_ImageView.setImage(imagen);
-        EP_ImageView.setRotate(180);
+        try {
+            strHeroe = (String) EP_cmbSeleccionarPersonaje.getValue();
+            Personaje personaje = (Personaje) mantenimientoArmas.getDatos().getPersonajes().get(strHeroe);
+            EP_edtNombre.setText(personaje.getNombre());
+            EP_edtTipo.setText(personaje.getTipo());
+            EP_edtVelocidad.setText(String.valueOf(personaje.getVelocidad()));
+            EP_edtVida.setText(String.valueOf(personaje.getVida()));
+            EP_edtNivel.setText(String.valueOf(personaje.getNivel()));
+            EP_edtNivelAparicion.setText(String.valueOf(personaje.getNivelAparicion()));
+            EP_edtCosto.setText(String.valueOf(personaje.getCosto()));
+            EP_edtApariencia.setText(personaje.getApariencia());
+            EP_edtCampos.setText(String.valueOf(personaje.getCampos()));
+            EP_edtGolpes.setText(String.valueOf(personaje.getGolpesSegundo()));
+            EP_edtNivelMaximo.setText(String.valueOf(personaje.getNivelMaximo()));
+            Image imagen = new Image(personaje.getApariencia() + EP_cmbSeleccionarAccion.getValue() + EP_cmbSeleccionarNivel.getValue() + ".gif");
+            EP_ImageView.setImage(imagen);
+            EP_ImageView.setRotate(180);
+        }catch (Exception e){
+            mensajeErrorConsulta();
+            limpiarPantallaEP();
+
+        }
     }
 
     @FXML
     private void handleGuardarPersonaje(ActionEvent event){
-        String nombre= EP_edtNombre.getText();
-        long velocidad = Long.parseLong(EP_edtVelocidad.getText());
-        long vida = Long.parseLong(EP_edtVida.getText());
-        long nivel= Long.parseLong(EP_edtNivel.getText());
-        long nivelAparicion= Long.parseLong(EP_edtNivelAparicion.getText());
-        long costo = Long.parseLong(EP_edtCosto.getText());
-        String apariencia = EP_edtApariencia.getText();
-        long campos= Long.parseLong(EP_edtCampos.getText());
-        long golpes= Long.parseLong(EP_edtGolpes.getText());
-        long nivelMaximo= Long.parseLong(EP_edtNivelMaximo.getText());
+        try {
+
+            String nombre = EP_edtNombre.getText();
+            String tipo = EP_edtTipo.getText();
+            long velocidad = Long.parseLong(EP_edtVelocidad.getText());
+            long vida = Long.parseLong(EP_edtVida.getText());
+            long nivel = Long.parseLong(EP_edtNivel.getText());
+            long nivelAparicion = Long.parseLong(EP_edtNivelAparicion.getText());
+            long costo = Long.parseLong(EP_edtCosto.getText());
+            String apariencia = EP_edtApariencia.getText();
+            long campos = Long.parseLong(EP_edtCampos.getText());
+            long golpes = Long.parseLong(EP_edtGolpes.getText());
+            long nivelMaximo = Long.parseLong(EP_edtNivelMaximo.getText());
 
 
-        PersonajeFactory personajeFactory = new PersonajeFactory();
+            PersonajeFactory personajeFactory = new PersonajeFactory();
 
 
-        Personaje personaje = personajeFactory.crearPersonaje("TERRESTRE",nombre,vida,nivel,nivelMaximo, AbstractObjeto.ESTADO.ESPERANDO,
-                nivelAparicion,costo,apariencia,golpes,campos,velocidad);
+            Personaje personaje = personajeFactory.crearPersonaje(tipo, nombre, vida, nivel, nivelMaximo, AbstractObjeto.ESTADO.ESPERANDO,
+                    nivelAparicion, costo, apariencia, golpes, campos, velocidad);
 
-        mantenimientoArmas.getPersonajes().put(nombre,personaje);
-        actualizarComboBoxes();
+            mantenimientoArmas.editarPersonaje(personaje);
+            actualizarComboBoxes();
 
-        EP_labelSeleccionarAccion.setVisible(true);
-        EP_labelSeleccionarPersonaje.setVisible(true);
-        EP_labelSeleccionarNivel.setVisible(true);
-        EP_cmbSeleccionarNivel.setVisible(true);
-        EP_cmbSeleccionarAccion.setVisible(true);
-        EP_cmbSeleccionarPersonaje.setVisible(true);
+            EP_labelSeleccionarAccion.setVisible(true);
+            EP_labelSeleccionarPersonaje.setVisible(true);
+            EP_labelSeleccionarNivel.setVisible(true);
+            EP_cmbSeleccionarNivel.setVisible(true);
+            EP_cmbSeleccionarAccion.setVisible(true);
+            EP_cmbSeleccionarPersonaje.setVisible(true);
+
+            EP_labelTipoPersonaje.setVisible(false);
+            EP_cmbTipoPersonaje.setVisible(false);
+
+
+            mensajeExito("Personaje");
+        }catch (Exception e){
+            mensajeError();
+        }
 
 
     }
@@ -342,20 +453,57 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private  void handleEP_crearPersonaje(ActionEvent event){
-        limparPantallaEP();
+        limpiarPantallaEP();
         EP_labelSeleccionarAccion.setVisible(false);
         EP_labelSeleccionarPersonaje.setVisible(false);
         EP_labelSeleccionarNivel.setVisible(false);
         EP_cmbSeleccionarNivel.setVisible(false);
         EP_cmbSeleccionarAccion.setVisible(false);
         EP_cmbSeleccionarPersonaje.setVisible(false);
+
+        EP_labelTipoPersonaje.setVisible(true);
+        EP_cmbTipoPersonaje.setVisible(true);
+    }
+
+
+
+    @FXML
+    private void hanldeCancelarCreacionPersonaje(ActionEvent  event){
+        actualizarComboBoxes();
+        EP_labelSeleccionarAccion.setVisible(true);
+        EP_labelSeleccionarPersonaje.setVisible(true);
+        EP_labelSeleccionarNivel.setVisible(true);
+        EP_cmbSeleccionarNivel.setVisible(true);
+        EP_cmbSeleccionarAccion.setVisible(true);
+        EP_cmbSeleccionarPersonaje.setVisible(true);
+
+        EP_labelTipoPersonaje.setVisible(false);
+        EP_cmbTipoPersonaje.setVisible(false);
+        limpiarPantallaEP();
+    }
+
+    @FXML
+    private void handleComboBoxTipoPersonaje(ActionEvent event){
+        String tipo= (String) EP_cmbTipoPersonaje.getValue();
+        EP_edtTipo.setText(tipo);
+    }
+
+    @FXML
+    private void handleBorrarPersonaje(ActionEvent event){
+        try{
+            mantenimientoArmas.borrarPersonaje(EP_edtNombre.getText());
+            limpiarPantallaEP();
+            mensajeBorrado("Personaje");
+
+        }catch (Exception e){
+            mensajeError();
+        }
     }
 
 
 
 
-
-    private void limparPantallaEP(){
+    private void limpiarPantallaEP(){
         EP_edtNivelMaximo.clear();
         EP_edtNombre.clear();
         EP_edtNivel.clear();
@@ -480,21 +628,43 @@ public class FXMLDocumentController implements Initializable {
             CG_cmbArma.getItems().add(i);
         }
 
-        for (String i: mantenimientoArmas.getDatos().getTiposGenerales()
+        for (String i: mantenimientoArmas.getDatos().getTiposPersonajes()
              ) {
             EA_cmbSeleccionTipo.getItems().add(i);
 
         }
 
-        EA_cmbSeleccionTipo.getSelectionModel().select(0);
+
+        for (String i: mantenimientoArmas.getDatos().getTiposArmas()
+        ) {
+            EA_cmbTipoArma.getItems().add(i);
+
+        }
+
+
+        for (String i: mantenimientoArmas.getDatos().getTiposPersonajes()
+        ) {
+            EP_cmbTipoPersonaje.getItems().add(i);
+
+        }
+
+
+        EA_cmbSeleccionTipo.getSelectionModel().select(1);
+        EA_cmbTipoArma.getSelectionModel().select(0);
         EA_cmbSeleccionTipo.setVisible(false);
+        EA_cmbTipoArma.setVisible(false);
         EA_labelQuienUsaArma.setVisible(false);
+        EA_labelTipoArma.setVisible(false);
 
 
 
         EA_cmbSeleccionArma.getSelectionModel().select(0);
+        EP_cmbTipoPersonaje.getSelectionModel().select(0);
         EP_cmbSeleccionarPersonaje.getSelectionModel().select(0);
+        EP_cmbTipoPersonaje.setVisible(false);
+        EP_labelTipoPersonaje.setVisible(false);
         EP_cmbSeleccionarAccion.getSelectionModel().select(0);
+        EP_cmbTipoPersonaje.getSelectionModel().select(0);
         CG_cmbHeroe.getSelectionModel().select(0);
         CG_cmbAccion.getSelectionModel().select(0);
         CG_cmbArma.getSelectionModel().select(0);
@@ -534,12 +704,46 @@ public class FXMLDocumentController implements Initializable {
                 CG_cmbHeroe.getItems().add(i);
             }
         }
-
-
-
-
-
     }
+
+
+    // venatanas emergentes
+
+    public void mensajeExito(String tipo){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.setContentText("Ha creado/editado un "+ tipo+" satisfactoriamente!");
+
+        alert.showAndWait();
+    }
+
+
+    public void mensajeError(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Ha ocurrido algún error");
+        alert.showAndWait();
+    }
+
+
+    public void mensajeErrorConsulta(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("No existe el elemento aconsultar");
+        alert.showAndWait();
+    }
+
+
+    public void mensajeBorrado(String tipo){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.setContentText("Ha borrado un "+ tipo+" satisfactoriamente!");
+
+        alert.showAndWait();
+    }
+
 
 
 

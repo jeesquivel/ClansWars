@@ -79,7 +79,16 @@ public  class Arma implements IArma{
 
     @Override
     public String toString() {
-        return "Arma {" + "nombre=" + nombre + ", alcance=" + alcance + ", danno=" + danno + ", rango=" + rango + ", nivel=" + nivel  + ", apariencia=" + apariencia + '}';
+        return "{\"nombre\":\""+ nombre +"\",\n"+
+                "\"tipo\": \""+ tipo + "\",\n"+
+                "\"nivel\":"+nivel+ ",\n"+
+                "\"nivelMaximo\":"+ nivelMaximo+",\n"+
+                "\"nivelAparicion\":"+ nivelAparicion+",\n"+
+                "\"danno\":"+danno+",\n"+
+                "\"rango\":"+ rango+",\n"+
+                "\"alcance\":"+alcance+",\n"+
+                "\"apariencia\":\""+apariencia+"\",\n"+
+                "\"puedeUsar\":\""+puedeUsar+"\"}";
     }
 
 

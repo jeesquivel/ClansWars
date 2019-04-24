@@ -13,7 +13,7 @@ public class Data {
     public HashMap<String, IPrototype> guerreros = new HashMap<>();
     public HashMap<String, Arma> armas = new HashMap<>();
     public ArrayList<String> estados = new ArrayList<>();
-    public ArrayList<String> TiposGenerales= new ArrayList<>();
+    public ArrayList<String> tiposPersonajes= new ArrayList<>();
     public ArrayList<String> tiposArmas = new ArrayList<>();
 
     public ArrayList<String> getTiposArmas() {
@@ -25,12 +25,12 @@ public class Data {
     }
 
 
-    public ArrayList<String> getTiposGenerales() {
-        return this.TiposGenerales;
+    public ArrayList<String> getTiposPersonajes() {
+        return this.tiposPersonajes;
     }
 
-    public void setTiposGenerales(ArrayList<String> tiposGenerales) {
-        this.TiposGenerales = tiposGenerales;
+    public void setTiposPersonajes(ArrayList<String> tiposGenerales) {
+        this.tiposPersonajes = tiposGenerales;
     }
 
 

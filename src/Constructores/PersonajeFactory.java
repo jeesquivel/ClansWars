@@ -11,13 +11,13 @@ public class PersonajeFactory  implements IPersonajeFactoryMethod{
         switch (tipo){
 
             case"AEREO":
-                personaje= new PersonajeAereo(nombre,vida,nivel,nivelMaximo,estado,nivelAparicion,costo,apariencia,golpesSegundo,campos,velocidad);
+                personaje= new PersonajeAereo(nombre,tipo,vida,nivel,nivelMaximo,estado,nivelAparicion,costo,apariencia,golpesSegundo,campos,velocidad);
                 break;
             case"TERRESTRE":
-                personaje = new PersonajeTerrestre(nombre,vida,nivel,nivelMaximo,estado,nivelAparicion,costo,apariencia,golpesSegundo,campos,velocidad);
+                personaje = new PersonajeTerrestre(nombre,tipo,vida,nivel,nivelMaximo,estado,nivelAparicion,costo,apariencia,golpesSegundo,campos,velocidad);
                 break;
             default:
-                personaje = new PersonajeTerrestre(nombre,vida,nivel,nivelMaximo,estado,nivelAparicion,costo,apariencia,golpesSegundo,campos,velocidad);
+                personaje = new PersonajeTerrestre(nombre,tipo,vida,nivel,nivelMaximo,estado,nivelAparicion,costo,apariencia,golpesSegundo,campos,velocidad);
                 break;
         }
         return personaje;

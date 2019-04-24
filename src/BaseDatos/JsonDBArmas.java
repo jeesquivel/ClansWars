@@ -5,10 +5,7 @@ package BaseDatos;
  */
 
 
-import Objetos.AbstractObjeto;
-import Objetos.Arma;
-import Objetos.IArma;
-import Objetos.Personaje;
+import Objetos.*;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,10 +15,11 @@ import java.awt.*;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
 
 
 
@@ -30,11 +28,10 @@ public class JsonDBArmas implements IBDArma {
     public JSONObject jsonArmas;
     public Data datos;
 
-
     public JsonDBArmas()  {
         datos= new Data();
         try {
-            this.jsonArmas = (JSONObject) cargarJson(getClass().getResource("./Armas.json").getPath().toString());
+            this.jsonArmas = (JSONObject) cargarJson(getClass().getResource("./datos.json").getPath().toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,6 +95,7 @@ public class JsonDBArmas implements IBDArma {
     @Override
     public void cargarPersonajes() {
         String nombre;
+        String tipo;
         long vida;
         long nivel;
         long nivelMaximo;
@@ -112,6 +110,7 @@ public class JsonDBArmas implements IBDArma {
         for (Object i : atributos) {
             Map mapa = (Map) i;
             nombre = (String) mapa.get("nombre");
+            tipo= (String) mapa.get("tipo");
             vida = (long) mapa.get("vida");
             nivel = (long) mapa.get("nivel");
             nivelMaximo = (long) mapa.get("nivelMaximo");
@@ -125,7 +124,7 @@ public class JsonDBArmas implements IBDArma {
             campos =(long) mapa.get("campos");
             golpesXsegundo=(long) mapa.get("golpesXsegundo");
 
-            Personaje personaje = new Personaje(nombre,vida,nivel,nivelMaximo, AbstractObjeto.ESTADO.ESPERANDO, nivelAparicion,  costo, apariencia,  golpesXsegundo,  campos,  velocidad);
+            Personaje personaje = new Personaje(nombre,tipo,vida,nivel,nivelMaximo, AbstractObjeto.ESTADO.ESPERANDO, nivelAparicion,  costo, apariencia,  golpesXsegundo,  campos,  velocidad);
             datos.addPersonaje(personaje);
         }
     }
@@ -141,8 +140,8 @@ public class JsonDBArmas implements IBDArma {
 
     @Override
     public void cargarTiposGenerales() {
-        ArrayList<String> tipos = (ArrayList<String>) jsonArmas.get("TiposGenerales");
-        datos.setTiposGenerales(tipos);
+        ArrayList<String> tipos = (ArrayList<String>) jsonArmas.get("TiposPersonajes");
+        datos.setTiposPersonajes(tipos);
 
 
     }
@@ -163,25 +162,69 @@ public class JsonDBArmas implements IBDArma {
 
     }
 
-    public void actualizarArmas(){
-        ObjectMapper mapper= new ObjectMapper();
-        Map<String,Object> mapa= new HashMap<>();
-        mapa.put("armeria",datos.getArmas());
 
-        JSONArray employeeList = (JSONArray)  jsonArmas.get("armeria");
+
+
+
+    public void actualizarDATOS(){
+
+
+
+
+
         //Write JSON file
-        try (FileWriter file = new FileWriter("Armas1.json")) {
+        try (FileWriter file = new FileWriter("src/BaseDatos/datos.json")) {
 
-            file.write(employeeList.toJSONString());
+            file.write("{"+otrosDatos()+ ",\n"+
+                    getDatosArmastoJSON(datos.getArmas())+ ","+
+                    getDatosPersonajestoJSON(datos.getPersonajes())+ "}");
             file.flush();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
     }
+
+
+    public String getDatosPersonajestoJSON(HashMap<String, IPrototype> mapa){
+        String text="";
+
+        for (String i: mapa.keySet()
+             ) {
+            Personaje p= (Personaje) mapa.get(i);
+            text+= p.toString()+ ",";
+        }
+
+        return "\"Personajes\":["+text.substring(0,text.length()-1)+ "]";
+    }
+
+    public String getDatosArmastoJSON(HashMap<String,Arma> mapa){
+        String text="";
+        for (String i:mapa.keySet()
+             ) {
+            Arma a= mapa.get(i);
+            text+=a.toString()+"," ;
+        }
+        return "\"armeria\":["+text.substring(0,text.length()-1)+"]";
+    }
+
+
+    public String otrosDatos(){
+       return  "\"TiposPersonajes\": [\"TERRESTRE\",\"AEREO\"],\n"+
+        "\"TiposArmas\": [\"HECHIZO\",\"ATAQUE\"],\n"+
+        "\"estados\":[\"Caminando\",\"Atacando\",\"Detenido\", \"Muerto\"]";
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

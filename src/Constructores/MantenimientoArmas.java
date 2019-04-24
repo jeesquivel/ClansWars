@@ -8,6 +8,7 @@ import BaseDatos.Data;
 import BaseDatos.JsonDBArmas;
 import Objetos.Arma;
 import Objetos.IPrototype;
+import Objetos.Personaje;
 
 import java.util.HashMap;
 
@@ -61,8 +62,26 @@ public class MantenimientoArmas implements IMantenimiento{
     @Override
     public void editarArma(Arma arma) {
         armeria.getData().getArmas().put(arma.getNombre(), arma);
-        armeria.actualizarArmas();
+        armeria.actualizarDATOS();
 
+    }
+
+    @Override
+    public void editarPersonaje(Personaje personaje) {
+        armeria.getData().getPersonajes().put(personaje.getNombre(),personaje);
+        armeria.actualizarDATOS();
+    }
+
+    @Override
+    public void borrarPersonaje(String name) {
+        armeria.getData().getPersonajes().remove(name);
+        armeria.actualizarDATOS();
+    }
+
+    @Override
+    public void borrarArma(String name) {
+        armeria.getData().getArmas().remove(name);
+        armeria.actualizarDATOS();
     }
 
     public Data getDatos(){

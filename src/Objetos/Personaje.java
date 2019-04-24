@@ -19,19 +19,23 @@ public class Personaje extends AbstractObjeto implements IMovible, IPrototype<Pe
     protected long golpesSegundo;         // Cantidad de veces que el guerrero ataca por segundo
     protected long campos;                   // Campos que necesita el guerrero
     protected long velocidad;                // Velocidad en que se mueve el guerrero
-    
+
+
+    protected String tipo;
     
     protected AbstractObjeto objetivo;      // El objetivo actual del guerrero
     protected IArma armaFavorita;           // El arma favorita de este guerrero por la que obtiene un porcentaje mayor de daño
     
     private ArrayList<AbstractObjeto> enemigos;
 
-    public Personaje(String nombre, long vida, long nivel, long nivelMaximo, ESTADO estado, long nivelAparicion, long costo, String apariencia, long golpesSegundo, long campos, long velocidad) {
+    public Personaje(String nombre,String tipo, long vida, long nivel, long nivelMaximo, ESTADO estado, long nivelAparicion, long costo, String apariencia, long golpesSegundo, long campos, long velocidad) {
         super(nombre, vida, nivel, nivelMaximo, estado, nivelAparicion, costo, apariencia);
         this.golpesSegundo = golpesSegundo;
         this.campos        = campos;
         this.velocidad     = velocidad;
         this.objetivo      = null;
+        this.tipo=tipo;
+
 
     }
     
@@ -41,7 +45,17 @@ public class Personaje extends AbstractObjeto implements IMovible, IPrototype<Pe
             this.estado = ESTADO.MUERTO;
     }
 
-    public double getGolpesSegundo() {
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+
+    public long getGolpesSegundo() {
         return golpesSegundo;
     }
 
@@ -99,17 +113,29 @@ public class Personaje extends AbstractObjeto implements IMovible, IPrototype<Pe
 
     @Override
     public String toString() {
-        return super.toString() + "Personaje{" + "golpesSegundo=" + golpesSegundo + ", campos=" + campos + ", velocidad=" + velocidad + ", objetivo=" + objetivo + ", armaFavorita=" + armaFavorita + ", enemigos=" + enemigos + '}';
+        return "{\"nombre\":\""+getNombre()+"\",\n"+
+                "\"tipo\":\"" +getTipo()+"\",\n"+
+                "\"vida\":" +getVida()+",\n"+
+                "\"nivel\":" +getNivel()+",\n"+
+                "\"nivelMaximo\":" +getNivelMaximo()+",\n"+
+                "\"nivelAparicion\":" +getNivelAparicion()+",\n"+
+                "\"costo\":"+getCosto()+",\n"+
+                "\"apariencia\":\""+getApariencia()+"\",\n"+
+                "\"x\":" +getPosicion().x+",\n"+
+                "\"y\":"+ getPosicion().y+",\n"+
+                "\"velocidad\":"+getVelocidad()+",\n"+
+                "\"campos\":"+getCampos()+",\n"+
+                "\"golpesXsegundo\":"+getGolpesSegundo()+ "}\n";
     }
     
     @Override
     public Personaje clonar() throws CloneNotSupportedException {
-       return new Personaje(nombre, vida, nivel, nivelMaximo, estado, nivelAparicion, costo, apariencia, golpesSegundo, campos, velocidad);
+       return new Personaje(nombre,tipo, vida, nivel, nivelMaximo, estado, nivelAparicion, costo, apariencia, golpesSegundo, campos, velocidad);
     }
 
     @Override
     public Personaje deepclonar() throws CloneNotSupportedException {
-        return new Personaje(nombre, vida, nivel, nivelMaximo, estado, nivelAparicion, costo, apariencia,  golpesSegundo, campos, velocidad);
+        return new Personaje(nombre,tipo, vida, nivel, nivelMaximo, estado, nivelAparicion, costo, apariencia,  golpesSegundo, campos, velocidad);
     }
     
 }
