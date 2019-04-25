@@ -15,16 +15,17 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <TabPane prefHeight="600.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clanswars.FXMLDocumentController">
   <tabs>
       <Tab text="Inicio">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="567.0" prefWidth="702.0">
                <children>
-                  <ImageView fitHeight="489.0" fitWidth="687.0" nodeOrientation="INHERIT" preserveRatio="true" AnchorPane.bottomAnchor="48.0">
+                  <ImageView fitHeight="600.0" fitWidth="700.0" nodeOrientation="INHERIT" preserveRatio="true" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <image>
-                        <Image url="@../images/fondo.jpg" />
+                        <Image url="@../images/fondoPrincipal.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
@@ -37,7 +38,15 @@
       <content>
         <AnchorPane fx:id="tabPane" minHeight="0.0" minWidth="0.0" prefHeight="479.0" prefWidth="588.0">
                <children>
-                  <Label fx:id="EA_labelSeleccionarArma" layoutX="26.0" layoutY="73.0" text="Seleccionar arma:" />
+                  <ImageView fitHeight="600.0" fitWidth="700.0" layoutX="1.0" opacity="0.64" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/fondo2.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="EA_labelSeleccionarArma" layoutX="26.0" layoutY="73.0" text="Seleccionar arma:">
+                     <font>
+                        <Font name="System Bold Italic" size="13.0" />
+                     </font></Label>
                   <ComboBox fx:id="EA_cmbSeleccionArma" layoutX="216.0" layoutY="68.0" onAction="#handleEA_comboBox" prefHeight="26.0" prefWidth="195.0" />
                   <ImageView fx:id="EA_ImageViewArma" fitHeight="150.0" fitWidth="150.0" layoutX="516.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                   <GridPane layoutX="30.0" layoutY="180.0" prefHeight="311.0" prefWidth="638.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="32.0">
@@ -87,10 +96,16 @@
                   </GridPane>
                   <Button fx:id="EA_btnGuardar" layoutX="598.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleGuardarArma" text="Guardar" />
                   <Button fx:id="EA_btnCrearArma" layoutX="26.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleCrearNuevaArma" text="Crear nueva arma" />
-                  <Label fx:id="EA_labelQuienUsaArma" layoutX="26.0" layoutY="105.0" text="Quien puede usar el arma:" />
+                  <Label fx:id="EA_labelQuienUsaArma" layoutX="26.0" layoutY="105.0" text="Quien puede usar el arma:">
+                     <font>
+                        <Font name="System Bold Italic" size="13.0" />
+                     </font></Label>
                   <ComboBox fx:id="EA_cmbSeleccionTipo" layoutX="216.0" layoutY="100.0" onAction="#handleComboBoxTipo" prefHeight="26.0" prefWidth="195.0" />
                   <Button fx:id="EA_btnCancelar" layoutX="411.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleCancelar" text="Cancelar" />
-                  <Label fx:id="EA_labelTipoArma" layoutX="26.0" layoutY="140.0" text="Tipo de arma:" />
+                  <Label fx:id="EA_labelTipoArma" layoutX="26.0" layoutY="140.0" text="Tipo de arma:">
+                     <font>
+                        <Font name="System Bold Italic" size="13.0" />
+                     </font></Label>
                   <ComboBox fx:id="EA_cmbTipoArma" layoutX="217.0" layoutY="135.0" onAction="#handleComboBoxTipoArma" prefHeight="26.0" prefWidth="194.0" />
                   <Label fx:id="EA_labelNivelArma" layoutX="30.0" layoutY="105.0" text="Nivel del arma:" />
                   <ComboBox fx:id="EA_cmbNivelArma" layoutX="216.0" layoutY="100.0" onAction="#handleComboBoxNivelArma" prefHeight="26.0" prefWidth="194.0" />
@@ -102,6 +117,11 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
+                  <ImageView fitHeight="600.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <image>
+                        <Image url="@../images/fondo2.png" />
+                     </image>
+                  </ImageView>
                   <Button fx:id="EP_btnCrearPersonaje" layoutX="34.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleEP_crearPersonaje" text="Crear nuevo Personaje" />
                   <Label fx:id="EP_labelSeleccionarPersonaje" layoutX="34.0" layoutY="64.0" text="Seleccionar personaje:" />
                   <ComboBox fx:id="EP_cmbSeleccionarPersonaje" layoutX="200.0" layoutY="59.0" onAction="#handleEP_comboBox" prefHeight="26.0" prefWidth="242.0" />
@@ -128,15 +148,42 @@
                     </rowConstraints>
                      <children>
                         <Label text="Nombre:" />
-                        <Label text="Vida:" GridPane.rowIndex="2" />
-                        <Label text="Nivel:" GridPane.rowIndex="3" />
-                        <Label text="Nivel Maximo:" GridPane.rowIndex="4" />
-                        <Label text="Nivel Aparicion:" GridPane.rowIndex="5" />
-                        <Label text="Costo:" GridPane.rowIndex="9" />
-                        <Label text="Apariencia:" GridPane.rowIndex="10" />
-                        <Label text="Velocidad:" GridPane.rowIndex="6" />
-                        <Label text="Campos:" GridPane.rowIndex="7" />
-                        <Label text="Golpes por segundo:" GridPane.rowIndex="8" />
+                        <Label text="Vida:" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold Italic" size="13.0" />
+                           </font></Label>
+                        <Label text="Nivel:" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="System Bold Italic" size="13.0" />
+                           </font></Label>
+                        <Label text="Nivel Maximo:" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold Italic" size="13.0" />
+                           </font></Label>
+                        <Label text="Nivel Aparicion:" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="System Bold Italic" size="13.0" />
+                           </font></Label>
+                        <Label text="Costo:" GridPane.rowIndex="9">
+                           <font>
+                              <Font name="System Bold Italic" size="13.0" />
+                           </font></Label>
+                        <Label text="Apariencia:" GridPane.rowIndex="10">
+                           <font>
+                              <Font name="System Bold Italic" size="13.0" />
+                           </font></Label>
+                        <Label text="Velocidad:" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="System Bold Italic" size="13.0" />
+                           </font></Label>
+                        <Label text="Campos:" GridPane.rowIndex="7">
+                           <font>
+                              <Font name="System Bold Italic" size="13.0" />
+                           </font></Label>
+                        <Label text="Golpes por segundo:" GridPane.rowIndex="8">
+                           <font>
+                              <Font name="System Bold Italic" size="13.0" />
+                           </font></Label>
                         <TextField fx:id="EP_edtNombre" GridPane.columnIndex="1" />
                         <TextField fx:id="EP_edtTipo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="EP_edtVida" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -157,7 +204,10 @@
                               <Button fx:id="EP_btnBuscarUrl" mnemonicParsing="false" onAction="#handleBuscarUrlPersonaje" prefHeight="26.0" prefWidth="101.0" text="Buscar URL" />
                            </children>
                         </HBox>
-                        <Label text="Tipo:" GridPane.rowIndex="1" />
+                        <Label text="Tipo:" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold Italic" size="13.0" />
+                           </font></Label>
                      </children>
                   </GridPane>
                   <Label fx:id="EP_labelSeleccionarNivel" layoutX="34.0" layoutY="132.0" text="Seleccionar Nivel:" />
@@ -175,6 +225,11 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
+                  <ImageView fitHeight="600.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <image>
+                        <Image url="@../images/fondo2.png" />
+                     </image>
+                  </ImageView>
                   <Label layoutX="36.0" layoutY="41.0" text="Seleccione el arma y el heroe para crear el guerrero" />
                   <Label layoutX="36.0" layoutY="101.0" text="Arma:" />
                   <Label layoutX="36.0" layoutY="163.0" text="Heroe:" />
